@@ -6,7 +6,7 @@
 <title>Pizza Grill Istanbul</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=Caveat+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Reem+Kufi:wght@500;600;700&family=Aref+Ruqaa:wght@400;700&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Layout : enseigne de grill la nuit. Bandeau charbon, braise orange, frise de faïence d'Iznik. Un seul look, assumé sombre. */
 :root{
@@ -14,10 +14,11 @@
   --braise:#f26b1d; --braise-c:#ffa15c;
   --cobalt:#2f5fb3; --turquoise:#46b5ab;
   --creme:#f3e6d0; --fumee:#ad9f8c;
-  --f-disp:"Alfa Slab One",Rockwell,"Roboto Slab",Georgia,serif;
+  --f-disp:"Lalezar",Impact,"Arial Black",sans-serif;
+  --f-kufi:"Reem Kufi","Trebuchet MS",system-ui,sans-serif;
   --f-cond:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
   --f-txt:"Barlow",system-ui,-apple-system,sans-serif;
-  --f-main:"Caveat Brush","Comic Sans MS",cursive;
+  --f-main:"Aref Ruqaa",Georgia,serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -41,28 +42,28 @@ h1,h2,h3{text-wrap:balance}
 /* En-tête collant avec le sélecteur sur place / livraison */
 .tete{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--charbon);border-bottom:1px solid var(--trait)}
 .tete .w{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding-block:8px}
-.marque{font-family:var(--f-disp);font-size:22px;line-height:1;text-decoration:none;letter-spacing:.01em}
+.marque{font-family:var(--f-disp);font-size:25px;line-height:1.1;text-decoration:none;letter-spacing:.01em}
 .marque span{color:var(--braise)}
 .mode{display:flex;background:var(--charbon-2);border:2px solid var(--trait);border-radius:999px;padding:3px;flex:none}
-.mode button{background:none;border:0;border-radius:999px;font-family:var(--f-cond);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;padding:6px 14px;cursor:pointer;color:var(--fumee)}
+.mode button{background:none;border:0;border-radius:999px;font-family:var(--f-cond);font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;padding:6px 11px;cursor:pointer;color:var(--fumee)}
 .mode button[aria-pressed=true]{background:var(--braise);color:var(--charbon)}
 .rubriques{border-top:1px solid var(--trait)}
 .rubriques .w{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
 .rubriques .w::-webkit-scrollbar{display:none}
-.rubriques a{flex:none;text-decoration:none;font-family:var(--f-cond);font-weight:600;font-size:16px;letter-spacing:.03em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--trait);border-radius:4px}
+.rubriques a{flex:none;text-decoration:none;font-family:var(--f-kufi);font-weight:600;font-size:15px;letter-spacing:.03em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--trait);border-radius:4px}
 .rubriques a:hover{border-color:var(--braise);color:var(--braise-c)}
-@media(max-width:520px){.marque{font-size:17px}.mode button{font-size:14px;padding:6px 10px}}
+@media(max-width:560px){.tete .w{flex-wrap:wrap}.marque{font-size:21px}.mode{width:100%}.mode button{flex:1;font-size:14px;padding:6px 4px}}
 
 /* Hero */
 .hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 70% 110%,#5a230a 0%,#2a1609 38%,var(--charbon) 70%)}
 #braises{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero .w{position:relative;padding-block:56px 48px;display:grid;gap:22px}
 .surtitre{font-family:var(--f-cond);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--turquoise);font-size:15px}
-.hero h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(52px,13vw,148px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase}
+.hero h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(56px,14vw,156px);line-height:.95;letter-spacing:0;text-transform:uppercase}
 .hero h1 .l2{display:block;color:var(--braise);-webkit-text-stroke:0}
 .hero h1 .l3{display:block;font-size:.62em;letter-spacing:.02em}
 .hero .chapo{max-width:34em;font-size:19px;color:var(--creme)}
-.hero .main{font-family:var(--f-main);font-size:26px;color:var(--braise-c);transform:rotate(-2deg);display:inline-block}
+.hero .main{font-family:var(--f-main);font-weight:700;font-size:25px;color:var(--braise-c);transform:rotate(-2deg);display:inline-block}
 .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .bt{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-cond);font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:12px 20px;border-radius:4px;border:2px solid var(--braise);cursor:pointer}
 .bt.plein{background:var(--braise);color:var(--charbon)}
@@ -74,10 +75,10 @@ h1,h2,h3{text-wrap:balance}
 /* Sections */
 section.bloc{padding-block:64px}
 .ent{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;margin-bottom:28px}
-.ent h2{font-family:var(--f-disp);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95;text-transform:uppercase}
+.ent h2{font-family:var(--f-disp);font-weight:400;font-size:clamp(42px,7.4vw,76px);line-height:1.05;text-transform:uppercase}
 .ent h2 em{font-style:normal;color:var(--braise)}
 .ent p{color:var(--fumee);max-width:30em;min-width:0}
-.note-main{font-family:var(--f-main);color:var(--turquoise);font-size:22px;line-height:1.15}
+.note-main{font-family:var(--f-main);font-weight:700;color:var(--turquoise);font-size:21px;line-height:1.15}
 
 /* Pizzas */
 .reglages{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:end;margin-bottom:22px}
@@ -95,18 +96,18 @@ section.bloc{padding-block:64px}
 .recherche input::placeholder{color:#7e715f}
 .bases{display:grid;grid-template-columns:1fr 1fr;gap:48px}
 @media(max-width:900px){.bases{grid-template-columns:1fr;gap:36px}}
-.base h3{font-family:var(--f-cond);font-weight:800;font-size:26px;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:10px;padding-bottom:8px;border-bottom:3px solid var(--braise);margin-bottom:4px}
+.base h3{font-family:var(--f-kufi);font-weight:700;font-size:25px;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:10px;padding-bottom:8px;border-bottom:3px solid var(--braise);margin-bottom:4px}
 .base h3 .pastille{width:16px;height:16px;border-radius:50%;flex:none}
 .liste{list-style:none}
 .ligne{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:2px 12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--trait)}
-.ligne .nom{font-family:var(--f-cond);font-weight:700;font-size:22px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.ligne .nom{font-family:var(--f-kufi);font-weight:600;font-size:20px;line-height:1.2;text-transform:uppercase;letter-spacing:.03em;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
 .ligne .ing{grid-column:1;color:var(--fumee);font-size:15px;line-height:1.35}
 .ligne .px{grid-column:2;grid-row:1/3;font-family:var(--f-cond);font-weight:800;font-size:24px;color:var(--braise-c);white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
 .ligne .px s{display:block;font-size:13px;font-weight:600;color:#7e715f;text-decoration:none;letter-spacing:.02em}
 .plus{grid-column:3;grid-row:1/3;width:40px;height:40px;border-radius:50%;border:2px solid var(--trait);background:none;cursor:pointer;font:800 22px var(--f-cond);line-height:1}
 .plus:hover{border-color:var(--braise);background:var(--braise);color:var(--charbon)}
 .plus.ok{background:var(--turquoise);border-color:var(--turquoise);color:var(--charbon)}
-.tag{font-family:var(--f-main);font-size:18px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--turquoise);transform:rotate(-3deg);display:inline-block}
+.tag{font-family:var(--f-main);font-weight:700;font-size:17px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--turquoise);transform:rotate(-3deg);display:inline-block}
 .porc{font-size:12px;font-family:var(--f-cond);font-weight:700;letter-spacing:.08em;color:var(--charbon);background:var(--fumee);border-radius:3px;padding:1px 5px;text-transform:uppercase}
 .vide-res{color:var(--fumee);padding:14px 0;font-size:17px}
 .supp{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px 32px;padding:18px 20px;background:var(--charbon-2);border-left:4px solid var(--turquoise);font-size:16px;color:var(--creme)}
@@ -147,18 +148,18 @@ section.bloc{padding-block:64px}
   -webkit-mask:radial-gradient(circle 7px at 50% 0,transparent 98%,#000) top/18px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 98%,#000) bottom/18px 51% repeat-x;
   mask:radial-gradient(circle 7px at 50% 0,transparent 98%,#000) top/18px 51% repeat-x,radial-gradient(circle 7px at 50% 100%,transparent 98%,#000) bottom/18px 51% repeat-x}
 .ticket .qte{font-family:var(--f-disp);font-size:54px;line-height:.9;color:var(--braise)}
-.ticket h3{font-family:var(--f-cond);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
+.ticket h3{font-family:var(--f-kufi);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
 .ticket p{font-size:15px;color:#6b5b48;flex:1}
 .ticket .pied{display:flex;justify-content:space-between;align-items:center;border-top:2px dashed #cdb998;padding-top:10px;margin-top:6px}
 .ticket .prix{font-family:var(--f-cond);font-weight:800;font-size:34px;font-variant-numeric:tabular-nums}
 .ticket button{background:var(--charbon);color:var(--creme);border:0;border-radius:3px;font-family:var(--f-cond);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;padding:8px 12px;cursor:pointer}
 .ticket button.ok{background:var(--cobalt)}
-.ticket .coca{font-family:var(--f-main);color:var(--cobalt);font-size:19px}
+.ticket .coca{font-family:var(--f-main);font-weight:700;color:var(--cobalt);font-size:18px}
 
 /* Nous trouver */
 .infos{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 @media(max-width:820px){.infos{grid-template-columns:1fr}}
-.info h3{font-family:var(--f-cond);font-weight:800;font-size:20px;letter-spacing:.1em;text-transform:uppercase;color:var(--turquoise);margin-bottom:6px}
+.info h3{font-family:var(--f-kufi);font-weight:700;font-size:19px;letter-spacing:.1em;text-transform:uppercase;color:var(--turquoise);margin-bottom:6px}
 .info p{font-size:18px}
 .a-completer{display:inline-block;font-family:var(--f-cond);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#4a2a14;color:var(--braise-c);border-radius:3px;padding:1px 6px;margin-left:4px}
 footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px solid var(--trait)}
@@ -170,7 +171,7 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 .panier.vide .barre{transform:translateY(140%)}
 .voile{position:fixed;inset:0;z-index:50;background:rgba(10,8,6,.7);display:flex;align-items:flex-end;justify-content:center;padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
 .feuille{background:var(--creme);color:var(--charbon);width:100%;max-width:560px;max-height:85vh;overflow:auto;border-radius:10px 10px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px))}
-.feuille h2{font-family:var(--f-disp);font-weight:400;font-size:34px;text-transform:uppercase}
+.feuille h2{font-family:var(--f-disp);font-weight:400;font-size:36px;line-height:1.1;text-transform:uppercase}
 .feuille .mode-rappel{font-family:var(--f-cond);font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:#b3480b;margin-bottom:12px}
 .feuille ul{list-style:none;border-top:2px dashed #cdb998}
 .feuille li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed #cdb998;font-size:16px}
@@ -182,6 +183,41 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 .feuille .aide{font-size:15px;color:#6b5b48;margin-bottom:14px}
 .feuille .rangee{display:flex;gap:10px;flex-wrap:wrap}
 .feuille .bt.vide{color:var(--charbon);border-color:var(--charbon)}
+/* Barquettes façon carte */
+.barq-zone{margin-top:52px}
+.barquettes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:16px}
+@media(max-width:640px){.barquettes{grid-template-columns:1fr 1fr}}
+.barq{background:none;border:0;padding:0;display:grid;justify-items:center;gap:8px;cursor:pointer;color:var(--charbon);font-family:var(--f-kufi);text-align:center}
+.plateau{position:relative;width:100%;max-width:170px;aspect-ratio:1.6;max-height:110px}
+.plateau .garniture{position:absolute;left:14%;right:14%;top:4%;height:52%;border-radius:40% 40% 8px 8px}
+.plateau .bac{position:absolute;left:0;right:0;bottom:0;height:62%;background:repeating-linear-gradient(90deg,#fbf4e7 0 14px,#d8401f 14px 28px);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);border-top:4px solid #fbf4e7}
+.g-frites{background:repeating-linear-gradient(100deg,#f2b632 0 6px,#e09a1a 6px 8px,transparent 8px 11px),repeating-linear-gradient(75deg,#f7c74a 0 5px,transparent 5px 12px)}
+.g-ble{background:radial-gradient(circle,#c9a25e 35%,transparent 40%) 0 0/7px 7px,#e3c48a}
+.g-viande{background:repeating-linear-gradient(170deg,#7a3a17 0 5px,#9b4c1f 5px 9px,#5d2a10 9px 11px)}
+.barq b{font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.03em}
+.barq .bp{font-family:var(--f-cond);font-weight:800;font-size:24px;color:#b3480b;font-variant-numeric:tabular-nums}
+.barq small{font-family:var(--f-txt);font-size:13px;color:#6b5b48}
+.barq:hover .bac,.barq.ok .bac{background:repeating-linear-gradient(90deg,#fbf4e7 0 14px,var(--cobalt) 14px 28px)}
+/* Boissons */
+.canettes{display:flex;gap:14px;align-items:flex-end;margin:6px 0 22px}
+.canette{width:34px;height:62px;border-radius:7px 7px 5px 5px;position:relative;box-shadow:inset -6px 0 0 rgba(0,0,0,.18),inset 4px 0 0 rgba(255,255,255,.18)}
+.canette::before{content:"";position:absolute;left:4px;right:4px;top:-5px;height:6px;border-radius:4px 4px 0 0;background:#b8b2aa}
+.boisson-ligne{max-width:560px}
+/* À emporter */
+.emporter{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px 48px;align-items:start}
+@media(max-width:820px){.emporter{grid-template-columns:1fr}}
+.etapes{list-style:none;display:grid;gap:14px;counter-reset:e}
+.etapes li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;counter-increment:e;font-size:18px}
+.etapes li::before{content:counter(e);width:44px;height:44px;border-radius:50%;background:var(--braise);color:var(--charbon);display:grid;place-items:center;font-family:var(--f-disp);font-size:24px;line-height:1}
+.etapes b{font-family:var(--f-kufi);font-weight:700;text-transform:uppercase;letter-spacing:.03em;display:block}
+.carte-emp{background:var(--charbon-2);border:2px solid var(--trait);padding:22px;display:grid;gap:12px}
+.carte-emp .tel{font-size:32px}
+.etat{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-kufi);font-weight:600;font-size:15px;padding:4px 12px;border-radius:999px;background:var(--charbon-2);border:1px solid var(--trait)}
+.etat i{width:10px;height:10px;border-radius:50%;background:var(--fumee)}
+.etat.ouvert i{background:#4cc36b}.etat.ferme i{background:#e0533d}
+.horaires{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:17px;font-variant-numeric:tabular-nums}
+.horaires .auj{color:var(--braise-c);font-weight:600}
+a.tel{text-decoration:none}
 </style>
 </head>
 <body>
@@ -193,12 +229,13 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
     <a href="#haut" class="marque">PIZZA GRILL <span>ISTANBUL</span></a>
     <div class="mode" role="group" aria-label="Prix affichés">
       <button type="button" id="m-sp" aria-pressed="true" data-mode="sp">Sur place</button>
+      <button type="button" id="m-emp" aria-pressed="false" data-mode="emp">À emporter</button>
       <button type="button" id="m-liv" aria-pressed="false" data-mode="liv">Livraison</button>
     </div>
   </div>
   <nav class="rubriques" aria-label="Rubriques">
     <div class="w">
-      <a href="#pizzas">Pizzas</a><a href="#grill">Sandwichs & assiettes</a><a href="#four">Paninis</a><a href="#salades">Salades</a><a href="#menus">Menus</a><a href="#trouver">Infos</a>
+      <a href="#pizzas">Pizzas</a><a href="#grill">Sandwichs & assiettes</a><a href="#barquettes">Barquettes</a><a href="#four">Paninis</a><a href="#salades">Salades</a><a href="#boissons">Boissons</a><a href="#menus">Menus</a><a href="#emporter">À emporter</a><a href="#trouver">Infos</a>
     </div>
   </nav>
 </header>
@@ -206,14 +243,15 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 <section class="hero" id="haut">
   <canvas id="braises" aria-hidden="true"></canvas>
   <div class="w">
-    <div class="surtitre">Marolles-en-Hurepoix · 91</div>
+    <div class="surtitre">29 Grande Rue · Marolles-en-Hurepoix</div>
     <h1>Pizza<span class="l2">Grill</span><span class="l3">Istanbul</span></h1>
     <p class="chapo">Les pizzas de la maison, de la Junior à la Méga 40 cm, le döner, les köfte et les assiettes du grill. Sur place, à emporter ou livré chez vous.</p>
     <span class="main">La Marolles Istanbul, c'est la pizza de chez nous.</span>
     <div class="actions">
       <a href="#pizzas" class="bt plein">Voir la carte</a>
       <a href="#menus" class="bt vide">Les menus</a>
-      <div class="tel"><small>Commander par téléphone</small>01 XX XX XX XX <span class="a-completer">à compléter</span></div>
+      <div class="tel"><small>Commander par téléphone</small><a class="tel" href="tel:+33164566464">01 64 56 64 64</a></div>
+      <span class="etat" data-etat><i></i><span>Horaires</span></span>
     </div>
   </div>
 </section>
@@ -261,15 +299,18 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
     </div>
     <div class="grille2">
       <div class="base"><h3>Sandwichs</h3><ul class="liste" id="l-sand"></ul>
-        <p style="margin-top:10px;font-size:15px;color:#6b5b48">Supplément fromage 0,50 € · œuf 1 €</p></div>
+</div>
       <div class="base"><h3>Assiettes</h3><ul class="liste" id="l-assiette"></ul></div>
     </div>
     <div class="grille2" style="margin-top:44px">
       <div class="base"><h3>Galettes</h3>
         <ul class="liste" id="l-galette"></ul></div>
-      <div class="base"><h3>Barquettes</h3>
-        <div class="barquettes" id="barq"></div></div>
+      <div class="base"><h3>Suppléments</h3>
+        <ul class="liste"><li class="ligne"><div class="nom">Fromage</div><div class="px">0,50 €</div></li><li class="ligne"><div class="nom">Œuf</div><div class="px">1,00 €</div></li></ul></div>
     </div>
+    <div class="base barq-zone" id="barquettes"><h3>Barquettes</h3>
+      <p style="color:#6b5b48;font-size:16px;margin-top:6px">Même prix sur place, à emporter et en livraison.</p>
+      <div class="barquettes" id="barq"></div></div>
   </div>
 </section>
 <div class="frise" aria-hidden="true"></div>
@@ -296,6 +337,20 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
   </div>
 </section>
 
+<section class="bloc" id="boissons">
+  <div class="w">
+    <div class="ent">
+      <h2>Les <em>boissons</em></h2>
+      <p>Une canette fraîche avec votre pizza ou votre sandwich.</p>
+    </div>
+    <div class="canettes" aria-hidden="true">
+      <span class="canette" style="background:#c8202b"></span><span class="canette" style="background:#1d1d1d;height:66px"></span><span class="canette" style="background:#f08a1c"></span><span class="canette" style="background:#2b8a4e;height:58px"></span><span class="canette" style="background:#2f5fb3"></span><span class="canette" style="background:#e8c21c;height:64px"></span>
+    </div>
+    <ul class="liste boisson-ligne"><li class="ligne"><div class="nom">Canette <span class="tag">au choix</span></div><div class="ing">Demandez la liste au comptoir</div><div class="px">1,50 €</div><button type="button" class="plus" aria-label="Ajouter une canette" data-k="can" data-i="0">+</button></li></ul>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
 <section class="bloc" id="menus">
   <div class="w">
     <div class="ent">
@@ -307,18 +362,41 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 </section>
 <div class="frise" aria-hidden="true"></div>
 
+<section class="bloc comptoir" id="emporter">
+  <div class="w">
+    <div class="ent">
+      <h2>À <em>emporter</em></h2>
+      <p>Commandez, on prépare, vous passez récupérer. Prix à emporter identiques aux prix sur place.</p>
+    </div>
+    <div class="emporter">
+      <ol class="etapes">
+        <li><span><b>Appelez</b>Au 01 64 56 64 64, aux heures d'ouverture.</span></li>
+        <li><span><b>Dites ce que vous voulez</b>Taille de pizza, viande, sauce. Le récap « Ma commande » peut vous aider.</span></li>
+        <li><span><b>Passez récupérer</b>Au 29 Grande Rue, à Marolles-en-Hurepoix.</span></li>
+      </ol>
+      <div class="carte-emp" style="background:#fbf4e7;border-color:#dccbb0">
+        <span style="font-family:var(--f-kufi);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b5b48;font-size:14px">Commander à emporter</span>
+        <a class="tel" style="color:var(--charbon)" href="tel:+33164566464">01 64 56 64 64</a>
+        <span class="etat" data-etat style="background:#fff;border-color:#dccbb0;color:var(--charbon)"><i></i><span>Horaires</span></span>
+        <button type="button" class="bt plein" id="voir-emp" style="justify-self:start">Voir les prix à emporter</button>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="frise" aria-hidden="true"></div>
+
 <section class="bloc" id="trouver">
   <div class="w">
     <div class="ent"><h2>Nous <em>trouver</em></h2></div>
     <div class="infos">
-      <div class="info"><h3>Adresse</h3><p>Marolles-en-Hurepoix (91630) <span class="a-completer">rue à compléter</span></p></div>
-      <div class="info"><h3>Horaires</h3><p>Midi et soir <span class="a-completer">à compléter</span></p></div>
-      <div class="info"><h3>Téléphone</h3><p class="tel" style="font-size:24px">01 XX XX XX XX <span class="a-completer">à compléter</span></p></div>
+      <div class="info"><h3>Adresse</h3><p>29 Grande Rue<br>91630 Marolles-en-Hurepoix</p><p style="margin-top:10px"><a class="bt vide" style="font-size:16px;padding:8px 14px" href="https://www.google.com/maps/search/?api=1&query=29+Grande+Rue+91630+Marolles-en-Hurepoix" target="_blank" rel="noopener">Itinéraire →</a></p></div>
+      <div class="info"><h3>Horaires</h3><div class="horaires" id="horaires"></div><p style="margin-top:10px"><span class="etat" data-etat><i></i><span>Horaires</span></span></p></div>
+      <div class="info"><h3>Téléphone</h3><p style="font-size:26px"><a class="tel" href="tel:+33164566464">01 64 56 64 64</a></p></div>
     </div>
   </div>
 </section>
 
-<footer><div class="w">Pizza Grill Istanbul, Marolles-en-Hurepoix. Maquette © Archipel Digital, reproduction interdite sans accord. Prix repris de la carte papier du restaurant.</div></footer>
+<footer><div class="w">Pizza Grill Istanbul, 29 Grande Rue, 91630 Marolles-en-Hurepoix · 01 64 56 64 64. Maquette © Archipel Digital, reproduction interdite sans accord. Prix repris de la carte papier du restaurant.</div></footer>
 
 <div class="panier vide" id="panier">
   <button type="button" class="barre" id="ouvrir"><span><span class="n" id="nb">0</span>Ma commande</span><span id="tot-barre">0,00 €</span></button>
@@ -350,7 +428,7 @@ var assi=[["Döner kebab","poulet et dinde"],["Steak","2 steaks de 100 g"],["Kö
 var panini=[["Thon","sauce tomate, mozzarella, thon"],["3 Fromages","sauce tomate, mozzarella, chèvre, brie, gorgonzola"],["Jambon","sauce tomate, mozzarella, jambon",1],["Saumon","sauce tomate, mozzarella, saumon fumé"],["Steak","sauce tomate, mozzarella, viande hachée"],["Chicken","sauce tomate, mozzarella, poulet tikka"],["Kebab","sauce tomate, mozzarella, viande kebab"],["Merguez","sauce tomate, mozzarella, merguez"],["Chorizo","sauce tomate, mozzarella, chorizo"],["Boursin","crème fraîche, viande hachée, boursin, mozzarella"]];
 var salade=[["Chèvre","tomates, concombre, chèvre, olives"],["Niçoise","tomates, thon, pomme de terre, concombre, olives, œuf, mayonnaise"],["Saumon fumé","concombre, saumon fumé, œuf dur, olives"],["Chef","tomates, concombre, mozzarella, épaule, maïs",1],["Paysanne","tomates, concombre, lardons…",1],["Plaza","tomates, concombre…"],["Kebab","tomates, concombre, oignons, viande kebab…"],["Maison","tomates, concombre, mozzarella, olives…"]];
 var menus=[["2","Menu 2 Junior","2 pizzas Junior au choix",23,1],["3","Menu 3 Junior","3 pizzas Junior au choix",28,0],["2","Menu 2 Sénior","2 pizzas Sénior au choix",33,1],["3","Menu 3 Sénior","3 pizzas Sénior au choix",38,0],["2","Menu 2 Méga","2 pizzas Méga 40 cm au choix",47,1]];
-var barq=[["Frites",[4,4]],["Blé",[4,4]],["Viande petite",[5,5]],["Viande grande",[8,8]]];
+var barq=[["Frites","",[4,4],"frites"],["Blé","boulgour",[4,4],"ble"],["Viande","petite",[5,5],"viande"],["Viande","grande",[8,8],"viande"]];
 var TAILLES=["Junior","Sénior","Méga"];
 
 var etat={mode:"sp",taille:1,cmd:[]};
@@ -376,7 +454,7 @@ function ligneSimple(it,k,i){
 document.getElementById("l-sand").innerHTML=sand.map(function(s,i){return ligneDuo(s,"sand",i,[8,9.5])}).join("");
 document.getElementById("l-assiette").innerHTML=assi.map(function(s,i){return ligneDuo(s,"assi",i,[12,13.5])}).join("");
 document.getElementById("l-galette").innerHTML=ligneDuo(["Galette","viande au choix, avec frites"],"gal",0,[8,9.5]);
-document.getElementById("barq").innerHTML=barq.map(function(b,i){return '<button type="button" class="barq" data-k="barq" data-i="'+i+'"><b>'+esc(b[0])+'</b><span>'+eur(b[1][0])+'</span><small>+ ajouter</small></button>'}).join("");
+document.getElementById("barq").innerHTML=barq.map(function(b,i){return '<button type="button" class="barq" data-k="barq" data-i="'+i+'"><span class="plateau" aria-hidden="true"'+(b[1]==="petite"?' style="max-width:130px"':'')+'><span class="garniture g-'+b[3]+'"></span><span class="bac"></span></span><b>'+esc(b[0])+'</b>'+(b[1]?'<small>'+esc(b[1])+'</small>':'')+'<span class="bp">'+eur(b[2][0])+'</span></button>'}).join("");
 document.getElementById("l-panini").innerHTML=panini.map(function(s,i){return ligneSimple(s,"pan",i)}).join("");
 document.getElementById("l-salade").innerHTML=salade.map(function(s,i){return ligneSimple(s,"sal",i)}).join("");
 document.getElementById("l-menus").innerHTML=menus.map(function(m,i){return '<div class="ticket"><div class="qte">×'+m[0]+'</div><h3>'+esc(m[1])+'</h3><p>'+esc(m[2])+(m[4]?'<br><span class="coca">+ 1 Coca 1,5 L</span>':'')+'</p><div class="pied"><span class="prix">'+m[3]+' €</span><button type="button" data-k="menu" data-i="'+i+'">Ajouter</button></div></div>'}).join("");
@@ -388,19 +466,21 @@ function article(k,b,i){
   else if(k==="sand"){var s=sand[i],q=s[2]||[8,9.5];nom="Sandwich "+s[0];sp=q[0];liv=q[1];}
   else if(k==="assi"){var a=assi[i],r=a[2]||[12,13.5];nom="Assiette "+a[0];sp=r[0];liv=r[1];}
   else if(k==="gal"){nom="Galette viande au choix";sp=8;liv=9.5;}
-  else if(k==="barq"){nom="Barquette "+barq[i][0].toLowerCase();sp=liv=barq[i][1][0];}
+  else if(k==="barq"){nom="Barquette "+barq[i][0].toLowerCase()+(barq[i][1]==="petite"||barq[i][1]==="grande"?" "+barq[i][1]:"");sp=liv=barq[i][2][0];}
+  else if(k==="can"){nom="Canette";sp=liv=1.5;}
   else if(k==="pan"){nom="Panini "+panini[i][0];sp=8;liv=9.5;}
   else if(k==="sal"){nom="Salade "+salade[i][0];sp=8;liv=9.5;}
   else if(k==="menu"){nom=menus[i][1];sp=liv=menus[i][3];}
   return {nom:nom,sp:sp,liv:liv};
 }
-function prixDe(a){return etat.mode==="sp"?a.sp:a.liv}
+function cle(){return etat.mode==="liv"?"liv":"sp"}
+function prixDe(a){return a[cle()]}
 function majPanier(){
   var n=etat.cmd.length,t=etat.cmd.reduce(function(s,a){return s+prixDe(a)},0);
   document.getElementById("nb").textContent=n;
   document.getElementById("tot-barre").textContent=eur(t);
   document.getElementById("f-tot").textContent=eur(t);
-  document.getElementById("f-mode").textContent=etat.mode==="sp"?"Sur place / à emporter":"En livraison";
+  document.getElementById("f-mode").textContent={sp:"Sur place",emp:"À emporter",liv:"En livraison"}[etat.mode];
   document.getElementById("panier").classList.toggle("vide",n===0);
   document.getElementById("f-liste").innerHTML=etat.cmd.map(function(a,i){return '<li><b>'+esc(a.nom)+'</b><span>'+eur(prixDe(a))+'</span><button type="button" aria-label="Retirer '+esc(a.nom)+'" data-r="'+i+'">×</button></li>'}).join("")||'<li><span style="font-weight:500">Rien pour l\'instant.</span></li>';
 }
@@ -408,7 +488,7 @@ document.addEventListener("click",function(e){
   var b=e.target.closest("[data-k]");
   if(b){
     etat.cmd.push(article(b.dataset.k,b.dataset.b,+b.dataset.i));majPanier();
-    b.classList.add("ok");var old=b.textContent;if(b.classList.contains("plus"))b.textContent="✓";else if(b.tagName==="BUTTON"&&!b.classList.contains("barq"))b.textContent="Ajouté";
+    b.classList.add("ok");var old=b.textContent;if(b.classList.contains("plus"))b.textContent="✓";else if(b.classList.contains("barq")){}else if(b.tagName==="BUTTON"&&!b.classList.contains("barq"))b.textContent="Ajouté";
     setTimeout(function(){b.classList.remove("ok");if(!b.classList.contains("barq"))b.textContent=old},900);
     return;
   }
@@ -424,8 +504,8 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")voile.hidden
 
 function appliquerMode(){
   document.querySelectorAll(".mode button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===etat.mode)});
-  document.querySelectorAll("[data-sp]").forEach(function(el){el.textContent=eur(+el.dataset[etat.mode])});
-  document.getElementById("grill-mode").textContent=etat.mode==="sp"?"Prix sur place. Basculez sur « Livraison » en haut pour voir les tarifs livrés.":"Prix en livraison. Basculez sur « Sur place » en haut pour les tarifs au comptoir.";
+  document.querySelectorAll("[data-sp]").forEach(function(el){el.textContent=eur(+el.dataset[cle()])});
+  document.getElementById("grill-mode").textContent={sp:"Prix sur place. Choisissez « Livraison » en haut pour voir les tarifs livrés.",emp:"Prix à emporter, identiques au sur place. Choisissez « Livraison » en haut pour les tarifs livrés.",liv:"Prix en livraison. Choisissez « Sur place » ou « À emporter » en haut pour les tarifs au comptoir."}[etat.mode];
   majPanier();
   try{localStorage.setItem("pgi-mode",etat.mode)}catch(_){}
 }
@@ -443,8 +523,31 @@ document.getElementById("q").addEventListener("input",function(){
     ul.querySelector(".vide-res").hidden=vis>0;
   });
 });
-try{var m=localStorage.getItem("pgi-mode");if(m==="liv"||m==="sp")etat.mode=m}catch(_){}
+try{var m=localStorage.getItem("pgi-mode");if(m==="liv"||m==="sp"||m==="emp")etat.mode=m}catch(_){}
 appliquerMode();
+document.getElementById("voir-emp").onclick=function(){etat.mode="emp";appliquerMode();document.getElementById("grill").scrollIntoView()};
+
+/* Horaires : lundi au samedi 11h-15h et 17h30-22h, fermé le dimanche */
+var JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],CRENEAUX=[[660,900],[1050,1320]];
+function maintenantParis(){
+  try{var f=new Intl.DateTimeFormat("fr-FR",{timeZone:"Europe/Paris",weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()),o={};f.forEach(function(x){o[x.type]=x.value});
+    var j=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."].indexOf(o.weekday);if(j<0)throw 0;return{j:j,m:(+o.hour)*60+(+o.minute)}}
+  catch(_){var d=new Date();return{j:d.getDay(),m:d.getHours()*60+d.getMinutes()}}
+}
+function hm(m){var h=Math.floor(m/60),mn=m%60;return h+"h"+(mn?String(mn).padStart(2,"0"):"")}
+function majEtat(){
+  var n=maintenantParis(),txt,cls,ouvert=false;
+  if(n.j!==0)CRENEAUX.forEach(function(c){if(n.m>=c[0]&&n.m<c[1]){ouvert=true;txt="Ouvert, jusqu'à "+hm(c[1])}});
+  if(!ouvert){
+    var proch=null;
+    if(n.j!==0)CRENEAUX.forEach(function(c){if(!proch&&n.m<c[0])proch="Fermé, ouvre à "+hm(c[0])});
+    if(!proch)proch=(n.j===6||n.j===0)?"Fermé, ouvre lundi à 11h":"Fermé, ouvre demain à 11h";
+    txt=proch;
+  }
+  document.querySelectorAll("[data-etat]").forEach(function(el){el.className="etat "+(ouvert?"ouvert":"ferme");el.querySelector("span").textContent=txt});
+  document.getElementById("horaires").innerHTML=[1,2,3,4,5,6,0].map(function(j){return '<span'+(j===n.j?' class="auj"':'')+'>'+JOURS[j]+'</span><span'+(j===n.j?' class="auj"':'')+'>'+(j===0?"Fermé":"11h – 15h · 17h30 – 22h")+'</span>'}).join("");
+}
+majEtat();setInterval(majEtat,60000);
 
 /* Braises qui montent du grill */
 var cv=document.getElementById("braises"),ctx=cv.getContext("2d"),pts=[],W,H,dpr=Math.min(window.devicePixelRatio||1,2);
