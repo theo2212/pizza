@@ -183,26 +183,29 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 .feuille .aide{font-size:15px;color:#6b5b48;margin-bottom:14px}
 .feuille .rangee{display:flex;gap:10px;flex-wrap:wrap}
 .feuille .bt.vide{color:var(--charbon);border-color:var(--charbon)}
-/* Barquettes façon carte */
+/* Barquettes en photo */
 .barq-zone{margin-top:52px}
-.barquettes{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:16px}
-@media(max-width:640px){.barquettes{grid-template-columns:1fr 1fr}}
-.barq{background:none;border:0;padding:0;display:grid;justify-items:center;gap:8px;cursor:pointer;color:var(--charbon);font-family:var(--f-kufi);text-align:center}
-.plateau{position:relative;width:100%;max-width:170px;aspect-ratio:1.6;max-height:110px}
-.plateau .garniture{position:absolute;left:14%;right:14%;top:4%;height:52%;border-radius:40% 40% 8px 8px}
-.plateau .bac{position:absolute;left:0;right:0;bottom:0;height:62%;background:repeating-linear-gradient(90deg,#fbf4e7 0 14px,#d8401f 14px 28px);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%);border-top:4px solid #fbf4e7}
-.g-frites{background:repeating-linear-gradient(100deg,#f2b632 0 6px,#e09a1a 6px 8px,transparent 8px 11px),repeating-linear-gradient(75deg,#f7c74a 0 5px,transparent 5px 12px)}
-.g-ble{background:radial-gradient(circle,#c9a25e 35%,transparent 40%) 0 0/7px 7px,#e3c48a}
-.g-viande{background:repeating-linear-gradient(170deg,#7a3a17 0 5px,#9b4c1f 5px 9px,#5d2a10 9px 11px)}
-.barq b{font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.03em}
-.barq .bp{font-family:var(--f-cond);font-weight:800;font-size:24px;color:#b3480b;font-variant-numeric:tabular-nums}
-.barq small{font-family:var(--f-txt);font-size:13px;color:#6b5b48}
-.barq:hover .bac,.barq.ok .bac{background:repeating-linear-gradient(90deg,#fbf4e7 0 14px,var(--cobalt) 14px 28px)}
+.barquettes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:16px}
+@media(max-width:700px){.barquettes{grid-template-columns:1fr}}
+.barq{background:#fbf4e7;border:2px solid var(--charbon);padding:0;display:grid;grid-template-rows:auto 1fr;cursor:pointer;color:var(--charbon);text-align:left;overflow:hidden}
+.barq .photo{aspect-ratio:4/3;max-width:100%;background:#c9965f;overflow:hidden}
+.barq .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.barq:hover .photo img{transform:scale(1.04)}
+.barq .txt{display:grid;gap:4px;padding:12px 14px 14px}
+.barq b{font-family:var(--f-kufi);font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.03em}
+.barq .bp{font-family:var(--f-cond);font-weight:800;font-size:22px;color:#b3480b;font-variant-numeric:tabular-nums}
+.barq small{font-size:14px;color:#6b5b48}
+.barq.ok{border-color:var(--cobalt)}
+.barq.sans-photo .photo{display:grid;place-items:center;background:repeating-linear-gradient(90deg,#fbf4e7 0 14px,#e9dcc4 14px 28px)}
+.barq.sans-photo .photo span{font-family:var(--f-main);font-weight:700;font-size:22px;color:#6b5b48}
 /* Boissons */
-.canettes{display:flex;gap:14px;align-items:flex-end;margin:6px 0 22px}
-.canette{width:34px;height:62px;border-radius:7px 7px 5px 5px;position:relative;box-shadow:inset -6px 0 0 rgba(0,0,0,.18),inset 4px 0 0 rgba(255,255,255,.18)}
-.canette::before{content:"";position:absolute;left:4px;right:4px;top:-5px;height:6px;border-radius:4px 4px 0 0;background:#b8b2aa}
-.boisson-ligne{max-width:560px}
+.boissons{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px 48px;align-items:start}
+@media(max-width:820px){.boissons{grid-template-columns:1fr}}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.duo figure{aspect-ratio:3/4;max-width:100%;overflow:hidden;background:var(--charbon-2)}
+.duo figure:nth-child(2){margin-top:28px}
+.duo img{width:100%;height:100%;object-fit:cover;display:block}
+.boisson-ligne .ligne .px{font-size:22px}
 /* À emporter */
 .emporter{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px 48px;align-items:start}
 @media(max-width:820px){.emporter{grid-template-columns:1fr}}
@@ -309,7 +312,7 @@ a.tel{text-decoration:none}
         <ul class="liste"><li class="ligne"><div class="nom">Fromage</div><div class="px">0,50 €</div></li><li class="ligne"><div class="nom">Œuf</div><div class="px">1,00 €</div></li></ul></div>
     </div>
     <div class="base barq-zone" id="barquettes"><h3>Barquettes</h3>
-      <p style="color:#6b5b48;font-size:16px;margin-top:6px">Même prix sur place, à emporter et en livraison.</p>
+      <p style="color:#6b5b48;font-size:16px;margin-top:6px">Même prix sur place, à emporter et en livraison. Viande : touchez la carte pour une petite, ou <button type="button" data-k="vg" data-i="0" style="background:none;border:0;border-bottom:2px solid var(--cobalt);color:var(--cobalt);font:inherit;font-weight:600;cursor:pointer">ajoutez une grande à 8 €</button>.</p>
       <div class="barquettes" id="barq"></div></div>
   </div>
 </section>
@@ -341,12 +344,15 @@ a.tel{text-decoration:none}
   <div class="w">
     <div class="ent">
       <h2>Les <em>boissons</em></h2>
-      <p>Une canette fraîche avec votre pizza ou votre sandwich.</p>
+      <p>Toutes à 1,50 €, bien fraîches.</p>
     </div>
-    <div class="canettes" aria-hidden="true">
-      <span class="canette" style="background:#c8202b"></span><span class="canette" style="background:#1d1d1d;height:66px"></span><span class="canette" style="background:#f08a1c"></span><span class="canette" style="background:#2b8a4e;height:58px"></span><span class="canette" style="background:#2f5fb3"></span><span class="canette" style="background:#e8c21c;height:64px"></span>
+    <div class="boissons">
+      <div class="duo">
+        <figure><img src="https://unsplash.com/photos/P35npQyRNGw/download?w=900" alt="Canette de Coca-Cola posée sur une table" loading="lazy" onerror="this.remove()"></figure>
+        <figure><img src="https://unsplash.com/photos/m8MVrbVa4FQ/download?w=900" alt="Canette de Pepsi" loading="lazy" onerror="this.remove()"></figure>
+      </div>
+      <ul class="liste boisson-ligne" id="l-boissons"></ul>
     </div>
-    <ul class="liste boisson-ligne"><li class="ligne"><div class="nom">Canette <span class="tag">au choix</span></div><div class="ing">Demandez la liste au comptoir</div><div class="px">1,50 €</div><button type="button" class="plus" aria-label="Ajouter une canette" data-k="can" data-i="0">+</button></li></ul>
   </div>
 </section>
 <div class="frise" aria-hidden="true"></div>
@@ -396,7 +402,7 @@ a.tel{text-decoration:none}
   </div>
 </section>
 
-<footer><div class="w">Pizza Grill Istanbul, 29 Grande Rue, 91630 Marolles-en-Hurepoix · 01 64 56 64 64. Maquette © Archipel Digital, reproduction interdite sans accord. Prix repris de la carte papier du restaurant.</div></footer>
+<footer><div class="w">Pizza Grill Istanbul, 29 Grande Rue, 91630 Marolles-en-Hurepoix · 01 64 56 64 64. Maquette © Archipel Digital, reproduction interdite sans accord. Prix repris de la carte papier du restaurant. Photos : Unsplash.</div></footer>
 
 <div class="panier vide" id="panier">
   <button type="button" class="barre" id="ouvrir"><span><span class="n" id="nb">0</span>Ma commande</span><span id="tot-barre">0,00 €</span></button>
@@ -428,7 +434,8 @@ var assi=[["Döner kebab","poulet et dinde"],["Steak","2 steaks de 100 g"],["Kö
 var panini=[["Thon","sauce tomate, mozzarella, thon"],["3 Fromages","sauce tomate, mozzarella, chèvre, brie, gorgonzola"],["Jambon","sauce tomate, mozzarella, jambon",1],["Saumon","sauce tomate, mozzarella, saumon fumé"],["Steak","sauce tomate, mozzarella, viande hachée"],["Chicken","sauce tomate, mozzarella, poulet tikka"],["Kebab","sauce tomate, mozzarella, viande kebab"],["Merguez","sauce tomate, mozzarella, merguez"],["Chorizo","sauce tomate, mozzarella, chorizo"],["Boursin","crème fraîche, viande hachée, boursin, mozzarella"]];
 var salade=[["Chèvre","tomates, concombre, chèvre, olives"],["Niçoise","tomates, thon, pomme de terre, concombre, olives, œuf, mayonnaise"],["Saumon fumé","concombre, saumon fumé, œuf dur, olives"],["Chef","tomates, concombre, mozzarella, épaule, maïs",1],["Paysanne","tomates, concombre, lardons…",1],["Plaza","tomates, concombre…"],["Kebab","tomates, concombre, oignons, viande kebab…"],["Maison","tomates, concombre, mozzarella, olives…"]];
 var menus=[["2","Menu 2 Junior","2 pizzas Junior au choix",23,1],["3","Menu 3 Junior","3 pizzas Junior au choix",28,0],["2","Menu 2 Sénior","2 pizzas Sénior au choix",33,1],["3","Menu 3 Sénior","3 pizzas Sénior au choix",38,0],["2","Menu 2 Méga","2 pizzas Méga 40 cm au choix",47,1]];
-var barq=[["Frites","",[4,4],"frites"],["Blé","boulgour",[4,4],"ble"],["Viande","petite",[5,5],"viande"],["Viande","grande",[8,8],"viande"]];
+var boissons=[["Coca-Cola","canette"],["Pepsi","canette"],["Oasis","canette"],["Ice Tea","canette"],["Cristaline pêche","bouteille"],["Cristaline fraise","bouteille"]];
+var barq=[["Frites","La barquette de frites",[4,4],"https://unsplash.com/photos/7v5VeESSjcE/download?w=900","Frites dans une barquette en carton"],["Blé","Boulgour, la barquette",[4,4],"",""],["Viande","Petite 5,00 € · Grande 8,00 €",[5,5],"https://unsplash.com/photos/rLlJqOXXdac/download?w=900","Broche de viande kebab qui tourne"]];
 var TAILLES=["Junior","Sénior","Méga"];
 
 var etat={mode:"sp",taille:1,cmd:[]};
@@ -454,7 +461,12 @@ function ligneSimple(it,k,i){
 document.getElementById("l-sand").innerHTML=sand.map(function(s,i){return ligneDuo(s,"sand",i,[8,9.5])}).join("");
 document.getElementById("l-assiette").innerHTML=assi.map(function(s,i){return ligneDuo(s,"assi",i,[12,13.5])}).join("");
 document.getElementById("l-galette").innerHTML=ligneDuo(["Galette","viande au choix, avec frites"],"gal",0,[8,9.5]);
-document.getElementById("barq").innerHTML=barq.map(function(b,i){return '<button type="button" class="barq" data-k="barq" data-i="'+i+'"><span class="plateau" aria-hidden="true"'+(b[1]==="petite"?' style="max-width:130px"':'')+'><span class="garniture g-'+b[3]+'"></span><span class="bac"></span></span><b>'+esc(b[0])+'</b>'+(b[1]?'<small>'+esc(b[1])+'</small>':'')+'<span class="bp">'+eur(b[2][0])+'</span></button>'}).join("");
+document.getElementById("barq").innerHTML=barq.map(function(b,i){
+  var ph=b[3]?'<span class="photo"><img src="'+b[3]+'" alt="'+esc(b[4])+'" loading="lazy" onerror="this.remove()"></span>':'<span class="photo"><span>photo du resto à venir</span></span>';
+  var prix=i===2?'<span class="bp">dès 5,00 €</span>':'<span class="bp">'+eur(b[2][0])+'</span>';
+  return '<button type="button" class="barq'+(b[3]?'':' sans-photo')+'" data-k="barq" data-i="'+i+'">'+ph+'<span class="txt"><b>'+esc(b[0])+'</b><small>'+esc(b[1])+'</small>'+prix+'</span></button>';
+}).join("");
+document.getElementById("l-boissons").innerHTML=boissons.map(function(d,i){return '<li class="ligne"><div class="nom">'+esc(d[0])+'</div><div class="ing">'+esc(d[1])+'</div><div class="px">1,50 €</div><button type="button" class="plus" aria-label="Ajouter '+esc(d[0])+'" data-k="can" data-i="'+i+'">+</button></li>'}).join("");
 document.getElementById("l-panini").innerHTML=panini.map(function(s,i){return ligneSimple(s,"pan",i)}).join("");
 document.getElementById("l-salade").innerHTML=salade.map(function(s,i){return ligneSimple(s,"sal",i)}).join("");
 document.getElementById("l-menus").innerHTML=menus.map(function(m,i){return '<div class="ticket"><div class="qte">×'+m[0]+'</div><h3>'+esc(m[1])+'</h3><p>'+esc(m[2])+(m[4]?'<br><span class="coca">+ 1 Coca 1,5 L</span>':'')+'</p><div class="pied"><span class="prix">'+m[3]+' €</span><button type="button" data-k="menu" data-i="'+i+'">Ajouter</button></div></div>'}).join("");
@@ -466,8 +478,9 @@ function article(k,b,i){
   else if(k==="sand"){var s=sand[i],q=s[2]||[8,9.5];nom="Sandwich "+s[0];sp=q[0];liv=q[1];}
   else if(k==="assi"){var a=assi[i],r=a[2]||[12,13.5];nom="Assiette "+a[0];sp=r[0];liv=r[1];}
   else if(k==="gal"){nom="Galette viande au choix";sp=8;liv=9.5;}
-  else if(k==="barq"){nom="Barquette "+barq[i][0].toLowerCase()+(barq[i][1]==="petite"||barq[i][1]==="grande"?" "+barq[i][1]:"");sp=liv=barq[i][2][0];}
-  else if(k==="can"){nom="Canette";sp=liv=1.5;}
+  else if(k==="barq"){nom="Barquette "+barq[i][0].toLowerCase()+(i===2?" petite":"");sp=liv=barq[i][2][0];}
+  else if(k==="vg"){nom="Barquette viande grande";sp=liv=8;}
+  else if(k==="can"){nom=boissons[i][0];sp=liv=1.5;}
   else if(k==="pan"){nom="Panini "+panini[i][0];sp=8;liv=9.5;}
   else if(k==="sal"){nom="Salade "+salade[i][0];sp=8;liv=9.5;}
   else if(k==="menu"){nom=menus[i][1];sp=liv=menus[i][3];}
