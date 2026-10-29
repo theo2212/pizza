@@ -23,7 +23,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
-html{scroll-behavior:smooth;scroll-padding-top:150px}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{background:var(--charbon);color:var(--creme);font-family:var(--f-txt);font-size:17px;line-height:1.5}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--charbon)}
@@ -41,15 +41,15 @@ h1,h2,h3{text-wrap:balance}
 .maquette .mail{font-weight:600;color:#a8430c;user-select:all}
 
 /* En-tête collant avec le sélecteur sur place / livraison */
-.tete{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--charbon);border-bottom:1px solid var(--trait)}
+.tete{position:relative;z-index:30;background:var(--charbon);border-bottom:1px solid var(--trait)}
 .tete .w{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding-block:8px}
 .marque{font-family:var(--f-disp);font-size:25px;line-height:1.1;text-decoration:none;letter-spacing:.01em}
 .marque span{color:var(--braise)}
 .mode{display:flex;background:var(--charbon-2);border:2px solid var(--trait);border-radius:999px;padding:3px;flex:none}
 .mode button{background:none;border:0;border-radius:999px;font-family:var(--f-cond);font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;padding:6px 11px;cursor:pointer;color:var(--fumee)}
 .mode button[aria-pressed=true]{background:var(--braise);color:var(--charbon)}
-.rubriques{border-top:1px solid var(--trait)}
-.rubriques .w{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.rubriques{background:var(--charbon);border-top:1px solid var(--trait)}
+.rubriques .w{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-block:14px}
 .rubriques .w::-webkit-scrollbar{display:none}
 .rubriques a{flex:none;text-decoration:none;font-family:var(--f-kufi);font-weight:600;font-size:15px;letter-spacing:.03em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--trait);border-radius:4px}
 .rubriques a:hover{border-color:var(--braise);color:var(--braise-c)}
@@ -88,7 +88,7 @@ section.bloc{padding-block:64px}
 .tailles{display:flex;gap:10px;align-items:flex-end}
 .tailles button{background:none;border:0;cursor:pointer;display:grid;justify-items:center;gap:6px;font-family:var(--f-cond);font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.04em;color:var(--fumee);padding:4px 6px}
 .tailles .rond{border-radius:50%;border:3px solid var(--fumee);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--fumee);transition:background .15s,border-color .15s}
-.tailles small{font-size:13px;font-weight:600;text-transform:none;letter-spacing:0}
+.tailles small{font-size:15px;font-weight:700;text-transform:none;letter-spacing:0;font-variant-numeric:tabular-nums}
 .tailles button[aria-pressed=true]{color:var(--creme)}
 .tailles button[aria-pressed=true] .rond{background:var(--braise);border-color:var(--braise);color:var(--charbon)}
 .recherche{display:flex;flex-direction:column;min-width:0}
@@ -219,6 +219,20 @@ footer{padding-block:28px 120px;color:var(--fumee);font-size:14px;border-top:1px
 .horaires{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:17px;font-variant-numeric:tabular-nums}
 .horaires .auj{color:var(--braise-c);font-weight:600}
 a.tel{text-decoration:none}
+.note-porc{margin-top:18px;font-size:15px;color:var(--fumee);display:flex;gap:8px;align-items:center}
+/* Fenêtre suppléments */
+.o-groupe{margin-top:16px}
+.o-titre{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:var(--f-kufi);font-weight:700;font-size:15px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.o-titre span{font-family:var(--f-cond);font-size:16px;color:#b3480b;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.o-titre small{display:block;font-family:var(--f-txt);font-weight:500;text-transform:none;letter-spacing:0;font-size:13px;color:#6b5b48}
+.puces{display:flex;flex-wrap:wrap;gap:8px}
+.puces button{background:#fff;border:2px solid #cdb998;border-radius:999px;padding:6px 13px;font-family:var(--f-txt);font-weight:600;font-size:15px;cursor:pointer;color:var(--charbon)}
+.puces button[aria-pressed=true]{background:var(--charbon);border-color:var(--charbon);color:var(--creme)}
+.puces button[aria-pressed=true]::before{content:"✓ "}
+.piquant{display:flex;align-items:center;gap:10px;margin-top:18px;padding:12px 14px;background:#fff;border:2px solid #cdb998;border-radius:8px;cursor:pointer;font-weight:600}
+.piquant input{width:20px;height:20px;accent-color:#d8401f}
+.piquant em{font-style:normal;margin-left:auto;font-family:var(--f-cond);font-weight:700;color:#2e7d4a}
+.feuille li small{display:block;font-size:13px;color:#6b5b48;font-weight:500;text-transform:none}
 </style>
 </head>
 <body>
@@ -234,11 +248,6 @@ a.tel{text-decoration:none}
       <button type="button" id="m-liv" aria-pressed="false" data-mode="liv">Livraison</button>
     </div>
   </div>
-  <nav class="rubriques" aria-label="Rubriques">
-    <div class="w">
-      <a href="#pizzas">Pizzas</a><a href="#grill">Sandwichs & assiettes</a><a href="#barquettes">Barquettes</a><a href="#four">Paninis</a><a href="#salades">Salades</a><a href="#boissons">Boissons</a><a href="#menus">Menus</a><a href="#emporter">À emporter</a><a href="#trouver">Infos</a>
-    </div>
-  </nav>
 </header>
 
 <section class="hero" id="haut">
@@ -256,21 +265,26 @@ a.tel{text-decoration:none}
     </div>
   </div>
 </section>
+<nav class="rubriques" aria-label="Rubriques">
+  <div class="w">
+    <a href="#pizzas">Pizzas</a><a href="#grill">Sandwichs & assiettes</a><a href="#barquettes">Barquettes</a><a href="#four">Paninis</a><a href="#salades">Salades</a><a href="#boissons">Boissons</a><a href="#menus">Menus</a><a href="#emporter">À emporter</a><a href="#trouver">Infos</a>
+  </div>
+</nav>
 <div class="frise" aria-hidden="true"></div>
 
 <section class="bloc" id="pizzas">
   <div class="w">
     <div class="ent">
       <h2>Les <em>pizzas</em></h2>
-      <p>36 recettes, base tomate ou crème fraîche. Choisissez la taille, les prix suivent.</p>
+      <p>36 recettes, base tomate ou crème fraîche. Choisissez la taille, puis touchez + pour ajouter des suppléments.</p>
     </div>
     <div class="reglages">
       <div>
         <div class="lbl">Taille</div>
         <div class="tailles" role="group" aria-label="Taille de pizza">
-          <button type="button" id="t-j" data-t="0" aria-pressed="false"><span class="rond" style="width:46px;height:46px">29</span>Junior<small>1 pers.</small></button>
-          <button type="button" id="t-s" data-t="1" aria-pressed="true"><span class="rond" style="width:56px;height:56px">33</span>Sénior<small>2 pers.</small></button>
-          <button type="button" id="t-m" data-t="2" aria-pressed="false"><span class="rond" style="width:68px;height:68px">40</span>Méga<small>3-4 pers.</small></button>
+          <button type="button" id="t-j" data-t="0" aria-pressed="false"><span class="rond" style="width:46px;height:46px"></span>Junior<small>29 cm</small></button>
+          <button type="button" id="t-s" data-t="1" aria-pressed="true"><span class="rond" style="width:56px;height:56px"></span>Sénior<small>33 cm</small></button>
+          <button type="button" id="t-m" data-t="2" aria-pressed="false"><span class="rond" style="width:68px;height:68px"></span>Méga<small>40 cm</small></button>
         </div>
       </div>
       <label class="recherche" for="q">
@@ -281,12 +295,7 @@ a.tel{text-decoration:none}
     <div class="bases">
       <div class="base"><h3><span class="pastille" style="background:#d8401f"></span>Base sauce tomate</h3><ul class="liste" id="l-tomate"></ul></div>
       <div class="base"><h3><span class="pastille" style="background:var(--creme)"></span>Base crème fraîche</h3><ul class="liste" id="l-creme"></ul>
-        <div class="supp">
-          <div><b>Viande ou poisson en plus</b><br><span>(sauf saumon)</span> 1 € · 1,50 € · 3 €</div>
-          <div><b>Légume en plus</b><br>0,50 € · 1 € · 1,50 €</div>
-          <div class="note-main">Sauce piquante offerte sur demande</div>
-          <div><span class="porc">porc</span> <span>Jambon et lardons sont du porc.</span></div>
-        </div>
+        <p class="note-porc"><span class="porc">porc</span> Jambon et lardons sont du porc.</p>
       </div>
     </div>
   </div>
@@ -402,6 +411,21 @@ a.tel{text-decoration:none}
 <div class="panier vide" id="panier">
   <button type="button" class="barre" id="ouvrir"><span><span class="n" id="nb">0</span>Ma commande</span><span id="tot-barre">0,00 €</span></button>
 </div>
+<div class="voile" id="opt" hidden>
+  <div class="feuille" role="dialog" aria-modal="true" aria-labelledby="o-nom">
+    <h2 id="o-nom">Pizza</h2>
+    <div class="mode-rappel" id="o-base">Base tomate</div>
+    <div class="o-groupe"><div class="o-titre">Taille</div><div class="puces" id="o-tailles"></div></div>
+    <div class="o-groupe"><div class="o-titre"><div>Viande ou poisson en plus<small>Saumon non disponible en supplément</small></div><span id="o-pv"></span></div><div class="puces" id="o-viandes"></div></div>
+    <div class="o-groupe"><div class="o-titre"><div>Légume en plus</div><span id="o-pl"></span></div><div class="puces" id="o-legumes"></div></div>
+    <label class="piquant" for="o-piq"><input type="checkbox" id="o-piq"> Sauce piquante <em>offerte</em></label>
+    <div class="total">Total<span id="o-tot">0,00 €</span></div>
+    <div class="rangee">
+      <button type="button" class="bt plein" id="o-ajout">Ajouter à ma commande</button>
+      <button type="button" class="bt vide" id="o-annul">Annuler</button>
+    </div>
+  </div>
+</div>
 <div class="voile" id="voile" hidden>
   <div class="feuille" role="dialog" aria-modal="true" aria-labelledby="f-titre">
     <h2 id="f-titre">Ma commande</h2>
@@ -430,7 +454,9 @@ var panini=[["Thon","sauce tomate, mozzarella, thon"],["3 Fromages","sauce tomat
 var salade=[["Chèvre","tomates, concombre, chèvre, olives"],["Niçoise","tomates, thon, pomme de terre, concombre, olives, œuf, mayonnaise"],["Saumon fumé","concombre, saumon fumé, œuf dur, olives"],["Chef","tomates, concombre, mozzarella, épaule, maïs",1],["Paysanne","tomates, concombre, lardons…",1],["Plaza","tomates, concombre…"],["Kebab","tomates, concombre, oignons, viande kebab…"],["Maison","tomates, concombre, mozzarella, olives…"]];
 var menus=[["2","Menu 2 Junior","2 pizzas Junior au choix",23,1],["3","Menu 3 Junior","3 pizzas Junior au choix",28,0],["2","Menu 2 Sénior","2 pizzas Sénior au choix",33,1],["3","Menu 3 Sénior","3 pizzas Sénior au choix",38,0],["2","Menu 2 Méga","2 pizzas Méga 40 cm au choix",47,1]];
 var barq=[["Frites","",[4,4],"frites"],["Blé","boulgour",[4,4],"ble"],["Viande","petite",[5,5],"viande"],["Viande","grande",[8,8],"viande"]];
-var TAILLES=["Junior","Sénior","Méga"];
+var TAILLES=["Junior","Sénior","Méga"],CM=[29,33,40];
+var SUPV=["Jambon","Lardons","Chorizo","Merguez","Viande hachée","Viande kebab","Poulet","Pepperoni","Thon","Anchois"],PV=[1,1.5,3];
+var SUPL=["Champignons","Oignons","Poivrons","Olives","Tomates fraîches","Pomme de terre","Artichauts"],PL=[.5,1,1.5];
 
 var etat={mode:"sp",taille:1,cmd:[]};
 function eur(n){return n.toFixed(2).replace(".",",")+" €"}
@@ -483,11 +509,12 @@ function majPanier(){
   document.getElementById("f-tot").textContent=eur(t);
   document.getElementById("f-mode").textContent={sp:"Sur place",emp:"À emporter",liv:"En livraison"}[etat.mode];
   document.getElementById("panier").classList.toggle("vide",n===0);
-  document.getElementById("f-liste").innerHTML=etat.cmd.map(function(a,i){return '<li><b>'+esc(a.nom)+'</b><span>'+eur(prixDe(a))+'</span><button type="button" aria-label="Retirer '+esc(a.nom)+'" data-r="'+i+'">×</button></li>'}).join("")||'<li><span style="font-weight:500">Rien pour l\'instant.</span></li>';
+  document.getElementById("f-liste").innerHTML=etat.cmd.map(function(a,i){return '<li><div><b>'+esc(a.nom)+'</b>'+(a.det?'<small>'+esc(a.det)+'</small>':'')+'</div><span>'+eur(prixDe(a))+'</span><button type="button" aria-label="Retirer '+esc(a.nom)+'" data-r="'+i+'">×</button></li>'}).join("")||'<li><span style="font-weight:500">Rien pour l\'instant.</span></li>';
 }
 document.addEventListener("click",function(e){
   var b=e.target.closest("[data-k]");
   if(b){
+    if(b.dataset.k==="pz"){ouvrirOpt(b.dataset.b,+b.dataset.i,b);return}
     etat.cmd.push(article(b.dataset.k,b.dataset.b,+b.dataset.i));majPanier();
     b.classList.add("ok");var old=b.textContent;if(b.classList.contains("plus"))b.textContent="✓";else if(b.classList.contains("barq")){}else if(b.tagName==="BUTTON"&&!b.classList.contains("barq"))b.textContent="Ajouté";
     setTimeout(function(){b.classList.remove("ok");if(!b.classList.contains("barq"))b.textContent=old},900);
@@ -496,12 +523,51 @@ document.addEventListener("click",function(e){
   var r=e.target.closest("[data-r]");
   if(r){etat.cmd.splice(+r.dataset.r,1);majPanier();}
 });
+/* Suppléments pizza */
+var optEl=document.getElementById("opt"),opt={},optSrc=null;
+function ouvrirOpt(base,i,src){
+  opt={base:base,p:(base==="creme"?creme:tomate)[i],t:etat.taille,v:[],l:[]};optSrc=src;
+  document.getElementById("o-piq").checked=false;
+  document.getElementById("o-nom").textContent=opt.p[0];
+  document.getElementById("o-base").textContent=base==="creme"?"Base crème fraîche":"Base sauce tomate";
+  rendOpt();optEl.hidden=false;document.getElementById("o-ajout").focus();
+}
+function prixOpt(){var pr=opt.p[5]||[11,16,23];return pr[opt.t]+opt.v.length*PV[opt.t]+opt.l.length*PL[opt.t]}
+function puces(liste,choix,attr){return liste.map(function(x,j){return '<button type="button" '+attr+'="'+j+'" aria-pressed="'+(choix.indexOf(j)>-1)+'">'+esc(x)+'</button>'}).join("")}
+function rendOpt(){
+  document.getElementById("o-tailles").innerHTML=TAILLES.map(function(x,j){return '<button type="button" data-ot="'+j+'" aria-pressed="'+(j===opt.t)+'">'+x+' · '+CM[j]+' cm</button>'}).join("");
+  document.getElementById("o-viandes").innerHTML=puces(SUPV,opt.v,"data-ov");
+  document.getElementById("o-legumes").innerHTML=puces(SUPL,opt.l,"data-ol");
+  document.getElementById("o-pv").textContent="+ "+eur(PV[opt.t])+" l'unité";
+  document.getElementById("o-pl").textContent="+ "+eur(PL[opt.t])+" l'unité";
+  document.getElementById("o-tot").textContent=eur(prixOpt());
+  document.getElementById("o-ajout").textContent="Ajouter · "+eur(prixOpt());
+}
+function bascule(arr,j){var k=arr.indexOf(j);if(k>-1)arr.splice(k,1);else arr.push(j)}
+optEl.addEventListener("click",function(e){
+  var t=e.target.closest("[data-ot]"),v=e.target.closest("[data-ov]"),l=e.target.closest("[data-ol]");
+  if(t){opt.t=+t.dataset.ot;rendOpt()}
+  else if(v){bascule(opt.v,+v.dataset.ov);rendOpt()}
+  else if(l){bascule(opt.l,+l.dataset.ol);rendOpt()}
+  else if(e.target===optEl)optEl.hidden=true;
+});
+document.getElementById("o-annul").onclick=function(){optEl.hidden=true};
+document.getElementById("o-ajout").onclick=function(){
+  var det=[];
+  if(opt.v.length)det.push("+ "+opt.v.map(function(j){return SUPV[j]}).join(", "));
+  if(opt.l.length)det.push("+ "+opt.l.map(function(j){return SUPL[j]}).join(", "));
+  if(document.getElementById("o-piq").checked)det.push("sauce piquante");
+  var x=prixOpt();
+  etat.cmd.push({nom:opt.p[0]+" · "+TAILLES[opt.t]+" "+CM[opt.t]+" cm",det:det.join(" · "),sp:x,liv:x});
+  majPanier();optEl.hidden=true;
+  if(optSrc){var b=optSrc;b.classList.add("ok");b.textContent="✓";setTimeout(function(){b.classList.remove("ok");b.textContent="+"},900);b.focus()}
+};
 var voile=document.getElementById("voile");
 document.getElementById("ouvrir").onclick=function(){voile.hidden=false;document.getElementById("fermer").focus()};
 document.getElementById("fermer").onclick=function(){voile.hidden=true};
 document.getElementById("vider").onclick=function(){etat.cmd=[];majPanier();voile.hidden=true};
 voile.addEventListener("click",function(e){if(e.target===voile)voile.hidden=true});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")voile.hidden=true});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){voile.hidden=true;optEl.hidden=true}});
 
 function appliquerMode(){
   document.querySelectorAll(".mode button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===etat.mode)});
