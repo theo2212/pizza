@@ -233,6 +233,44 @@ a.tel{text-decoration:none}
 .piquant input{width:20px;height:20px;accent-color:#d8401f}
 .piquant em{font-style:normal;margin-left:auto;font-family:var(--f-cond);font-weight:700;color:#2e7d4a}
 .feuille li small{display:block;font-size:13px;color:#6b5b48;font-weight:500;text-transform:none}
+/* Choix du mode dans le hero + code postal */
+.choix-mode{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:640px}
+.choix-mode button{background:var(--charbon-2);border:2px solid var(--trait);border-radius:6px;padding:12px 12px 10px;text-align:left;cursor:pointer;font-family:var(--f-kufi);font-weight:700;font-size:clamp(15px,3.8vw,19px);text-transform:uppercase;letter-spacing:.03em;line-height:1.15}
+.choix-mode button small{display:block;font-family:var(--f-txt);font-weight:500;font-size:13px;text-transform:none;letter-spacing:0;color:var(--fumee);margin-top:4px}
+.choix-mode button[aria-pressed=true]{background:var(--braise);border-color:var(--braise);color:var(--charbon)}
+.choix-mode button[aria-pressed=true] small{color:#3b1d08}
+.cp-box{max-width:640px;background:var(--creme);color:var(--charbon);border-radius:6px;padding:14px 16px}
+.cp-box label{display:block;font-weight:600;margin-bottom:8px}
+.cp-ligne{display:flex;gap:10px}
+.cp-ligne input{flex:1;min-width:0;font:700 22px var(--f-cond);letter-spacing:.1em;border:0;border-bottom:3px solid var(--charbon);background:transparent;padding:4px 2px;outline:0;color:var(--charbon)}
+.cp-ligne input:focus{border-color:var(--braise)}
+.cp-ligne button,.cp-box .alt{background:var(--charbon);color:var(--creme);border:0;border-radius:4px;font-family:var(--f-cond);font-weight:700;font-size:17px;padding:8px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+.cp-msg{margin-top:8px;font-size:16px}
+.cp-msg.non{color:#b3301b}.cp-msg.oui{color:#2e7d4a;font-weight:600}
+.cp-box .alt{margin-top:8px;background:#b3480b}
+/* Ticket de commande */
+.f-date{font-family:var(--f-cond);font-weight:600;font-size:15px;color:#6b5b48;margin-bottom:12px;letter-spacing:.04em}
+.feuille li .qte-ctl{display:flex;align-items:center;gap:6px}
+.feuille li .qte-ctl b{min-width:18px;text-align:center;font-size:18px}
+.feuille li .qte-ctl button{width:30px;height:30px}
+.f-bloc{margin-top:18px}
+.f-info{font-size:14px;color:#6b5b48;margin-top:6px}
+.champs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.champs .large{grid-column:1/-1}
+.feuille input[type=text],.feuille input[type=tel],.feuille select,.feuille textarea{width:100%;min-width:0;background:#fff;border:2px solid #cdb998;border-radius:6px;padding:10px 12px;font:500 16px var(--f-txt);color:var(--charbon)}
+.feuille input:focus,.feuille select:focus,.feuille textarea:focus{outline:0;border-color:#b3480b}
+.feuille input.bad{border-color:#b3301b}
+.feuille textarea{min-height:64px;resize:vertical;margin-top:18px}
+.f-err{font-size:14px;color:#b3301b;margin-top:6px}
+.puces button:disabled{opacity:.5;cursor:not-allowed}
+.f-envoi{margin-top:16px;display:grid;gap:8px}
+.f-envoi .bt{justify-content:center;width:100%}
+.f-envoi .bt:disabled{opacity:.45;cursor:not-allowed;filter:none}
+.f-aide{font-size:14px;color:#6b5b48;text-align:center}
+.f-ok{text-align:center}
+.f-ok .num{font-family:var(--f-disp);font-size:52px;color:#b3480b;line-height:1.1}
+.f-ok p{margin-top:6px}
+.recu{text-align:left;background:#fff;border:2px dashed #cdb998;padding:14px;margin:14px 0;font:14px/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
@@ -242,8 +280,8 @@ a.tel{text-decoration:none}
 <header class="tete">
   <div class="w">
     <a href="#haut" class="marque">PIZZA GRILL <span>ISTANBUL</span></a>
-    <div class="mode" role="group" aria-label="Prix affichés">
-      <button type="button" id="m-sp" aria-pressed="true" data-mode="sp">Sur place</button>
+    <div class="mode" role="group" aria-label="Comment commander">
+      <button type="button" id="m-sp" aria-pressed="true" data-mode="sp">La carte</button>
       <button type="button" id="m-emp" aria-pressed="false" data-mode="emp">À emporter</button>
       <button type="button" id="m-liv" aria-pressed="false" data-mode="liv">Livraison</button>
     </div>
@@ -257,8 +295,18 @@ a.tel{text-decoration:none}
     <h1>Pizza<span class="l2">Grill</span><span class="l3">Istanbul</span></h1>
     <p class="chapo">Les pizzas de la maison, de la Junior à la Méga 40 cm, le döner, les köfte et les assiettes du grill. Sur place, à emporter ou livré chez vous.</p>
     <span class="main">La Marolles Istanbul, c'est la pizza de chez nous.</span>
+    <div class="choix-mode" role="group" aria-label="Comment voulez-vous commander ?">
+      <button type="button" id="h-sp" data-mode="sp" aria-pressed="true">La carte<small>juste regarder</small></button>
+      <button type="button" id="h-emp" data-mode="emp" aria-pressed="false">À emporter<small>prête en 15-20 min</small></button>
+      <button type="button" id="h-liv" data-mode="liv" aria-pressed="false">Livraison<small>chez vous en 35-45 min</small></button>
+    </div>
+    <div class="cp-box" id="cpBox" hidden>
+      <label for="cpHero">On livre chez vous ? Entrez votre code postal</label>
+      <div class="cp-ligne"><input id="cpHero" inputmode="numeric" maxlength="5" placeholder="91630" autocomplete="postal-code"><button type="button" id="cpOk">Vérifier</button></div>
+      <div class="cp-msg" id="cpMsg" aria-live="polite"></div>
+    </div>
     <div class="actions">
-      <a href="#pizzas" class="bt plein">Voir la carte</a>
+      <a href="#pizzas" class="bt plein" id="bt-hero">Voir la carte</a>
       <a href="#menus" class="bt vide">Les menus</a>
       <div class="tel"><small>Commander par téléphone</small><a class="tel" href="tel:+33164566464">01 64 56 64 64</a></div>
       <span class="etat" data-etat><i></i><span>Horaires</span></span>
@@ -376,19 +424,20 @@ a.tel{text-decoration:none}
   <div class="w">
     <div class="ent">
       <h2>À <em>emporter</em></h2>
-      <p>Commandez, on prépare, vous passez récupérer. Prix à emporter identiques aux prix sur place.</p>
+      <p>Commandez sur le site, on prépare, vous passez récupérer. Prix à emporter identiques aux prix sur place.</p>
     </div>
     <div class="emporter">
       <ol class="etapes">
-        <li><span><b>Appelez</b>Au 01 64 56 64 64, aux heures d'ouverture.</span></li>
-        <li><span><b>Dites ce que vous voulez</b>Taille de pizza, viande, sauce. Le récap « Ma commande » peut vous aider.</span></li>
-        <li><span><b>Passez récupérer</b>Au 29 Grande Rue, à Marolles-en-Hurepoix.</span></li>
+        <li><span><b>Composez votre commande</b>Touchez + sur la carte. Taille, suppléments, sauce piquante : tout se choisit en ligne.</span></li>
+        <li><span><b>Choisissez l'heure</b>Dès que possible ou à l'heure qui vous arrange, puis envoyez.</span></li>
+        <li><span><b>Passez récupérer</b>Au 29 Grande Rue, à Marolles-en-Hurepoix. Vous payez au comptoir.</span></li>
       </ol>
       <div class="carte-emp" style="background:#fbf4e7;border-color:#dccbb0">
         <span style="font-family:var(--f-kufi);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b5b48;font-size:14px">Commander à emporter</span>
         <a class="tel" style="color:var(--charbon)" href="tel:+33164566464">01 64 56 64 64</a>
         <span class="etat" data-etat style="background:#fff;border-color:#dccbb0;color:var(--charbon)"><i></i><span>Horaires</span></span>
-        <button type="button" class="bt plein" id="voir-emp" style="justify-self:start">Voir les prix à emporter</button>
+        <button type="button" class="bt plein" id="voir-emp" style="justify-self:start">Commander à emporter</button>
+        <span style="font-size:14px;color:#6b5b48">Vous préférez appeler ? Même numéro, mêmes prix.</span>
       </div>
     </div>
   </div>
@@ -428,14 +477,41 @@ a.tel{text-decoration:none}
 </div>
 <div class="voile" id="voile" hidden>
   <div class="feuille" role="dialog" aria-modal="true" aria-labelledby="f-titre">
-    <h2 id="f-titre">Ma commande</h2>
-    <div class="mode-rappel" id="f-mode">Sur place</div>
-    <ul id="f-liste"></ul>
-    <div class="total">Total<span id="f-tot">0,00 €</span></div>
-    <p class="aide">Démo : sur le vrai site, ce récap s'affiche au téléphone ou part en commande en ligne. Montrez-le au comptoir ou dictez-le en appelant.</p>
-    <div class="rangee">
-      <button type="button" class="bt plein" id="fermer">Continuer</button>
-      <button type="button" class="bt vide" id="vider">Vider</button>
+    <div id="f-cmd">
+      <h2 id="f-titre">Ma commande</h2>
+      <div class="f-date" id="f-date"></div>
+      <ul id="f-liste"></ul>
+      <div class="total">Total<span id="f-tot">0,00 €</span></div>
+      <div class="f-bloc"><div class="o-titre">Comment ?</div>
+        <div class="puces" id="f-modes"><button type="button" data-fm="emp" aria-pressed="true">À emporter</button><button type="button" data-fm="liv" aria-pressed="false">Livraison</button></div>
+        <p class="f-info" id="f-info"></p></div>
+      <div class="f-bloc"><div class="o-titre">Vous</div>
+        <div class="champs">
+          <input type="text" id="f-prenom" placeholder="Prénom" autocomplete="given-name">
+          <input type="tel" id="f-tel" placeholder="Téléphone" autocomplete="tel">
+          <input type="text" id="f-adr" class="large" placeholder="Adresse, étage, code" autocomplete="street-address" data-adr>
+          <input type="text" id="f-cp" placeholder="Code postal" inputmode="numeric" maxlength="5" autocomplete="postal-code" data-adr>
+        </div>
+        <p class="f-err" id="f-cperr" aria-live="polite"></p></div>
+      <div class="f-bloc"><label class="o-titre" for="f-quand">Quand ?</label><select id="f-quand"></select></div>
+      <div class="f-bloc"><div class="o-titre">Paiement</div>
+        <div class="puces"><button type="button" id="f-pay" aria-pressed="true">Au comptoir</button><button type="button" disabled>Carte en ligne</button></div>
+        <p class="f-info">Espèces ou carte. Le paiement en ligne arrive bientôt.</p></div>
+      <textarea id="f-note" placeholder="Une précision ? (sans oignons, sauce blanche, sonner 2 fois…)"></textarea>
+      <div class="f-envoi">
+        <button type="button" class="bt plein" id="f-envoyer">Envoyer la commande</button>
+        <p class="f-aide" id="f-aide"></p>
+        <button type="button" class="bt vide" id="fermer">Continuer mes achats</button>
+      </div>
+    </div>
+    <div class="f-ok" id="f-ok" hidden>
+      <h2 id="ok-titre">Merci !</h2>
+      <div class="num" id="ok-num">#0000</div>
+      <p id="ok-delai"></p>
+      <p id="ok-tel"></p>
+      <p class="aide" style="margin-top:14px">Démo : voici ce que le restaurant recevrait sur sa tablette.</p>
+      <pre class="recu" id="ok-recu"></pre>
+      <button type="button" class="bt plein" id="ok-fermer">Fermer</button>
     </div>
   </div>
 </div>
@@ -502,26 +578,31 @@ function article(k,b,i){
 }
 function cle(){return etat.mode==="liv"?"liv":"sp"}
 function prixDe(a){return a[cle()]}
+function ajouter(a){
+  var x=etat.cmd.filter(function(c){return c.nom===a.nom&&(c.det||"")===(a.det||"")})[0];
+  if(x)x.q++;else{a.q=1;etat.cmd.push(a)}
+  majPanier();
+}
 function majPanier(){
-  var n=etat.cmd.length,t=etat.cmd.reduce(function(s,a){return s+prixDe(a)},0);
+  var n=etat.cmd.reduce(function(s,a){return s+a.q},0),t=etat.cmd.reduce(function(s,a){return s+prixDe(a)*a.q},0);
   document.getElementById("nb").textContent=n;
   document.getElementById("tot-barre").textContent=eur(t);
   document.getElementById("f-tot").textContent=eur(t);
-  document.getElementById("f-mode").textContent={sp:"Sur place",emp:"À emporter",liv:"En livraison"}[etat.mode];
   document.getElementById("panier").classList.toggle("vide",n===0);
-  document.getElementById("f-liste").innerHTML=etat.cmd.map(function(a,i){return '<li><div><b>'+esc(a.nom)+'</b>'+(a.det?'<small>'+esc(a.det)+'</small>':'')+'</div><span>'+eur(prixDe(a))+'</span><button type="button" aria-label="Retirer '+esc(a.nom)+'" data-r="'+i+'">×</button></li>'}).join("")||'<li><span style="font-weight:500">Rien pour l\'instant.</span></li>';
+  document.getElementById("f-liste").innerHTML=etat.cmd.map(function(a,i){return '<li><div><b>'+esc(a.nom)+'</b>'+(a.det?'<small>'+esc(a.det)+'</small>':'')+'</div><span>'+eur(prixDe(a)*a.q)+'</span><div class="qte-ctl"><button type="button" aria-label="Retirer un '+esc(a.nom)+'" data-dq="-1" data-i="'+i+'">−</button><b>'+a.q+'</b><button type="button" aria-label="Ajouter un '+esc(a.nom)+'" data-dq="1" data-i="'+i+'">+</button></div></li>'}).join("")||'<li><span style="font-weight:500">Rien pour l\'instant.</span></li>';
+  if(typeof majTicket==="function")majTicket();
 }
 document.addEventListener("click",function(e){
   var b=e.target.closest("[data-k]");
   if(b){
     if(b.dataset.k==="pz"){ouvrirOpt(b.dataset.b,+b.dataset.i,b);return}
-    etat.cmd.push(article(b.dataset.k,b.dataset.b,+b.dataset.i));majPanier();
+    ajouter(article(b.dataset.k,b.dataset.b,+b.dataset.i));
     b.classList.add("ok");var old=b.textContent;if(b.classList.contains("plus"))b.textContent="✓";else if(b.classList.contains("barq")){}else if(b.tagName==="BUTTON"&&!b.classList.contains("barq"))b.textContent="Ajouté";
     setTimeout(function(){b.classList.remove("ok");if(!b.classList.contains("barq"))b.textContent=old},900);
     return;
   }
-  var r=e.target.closest("[data-r]");
-  if(r){etat.cmd.splice(+r.dataset.r,1);majPanier();}
+  var r=e.target.closest("[data-dq]");
+  if(r){var it=etat.cmd[+r.dataset.i];it.q+=+r.dataset.dq;if(it.q<1)etat.cmd.splice(+r.dataset.i,1);majPanier();}
 });
 /* Suppléments pizza */
 var optEl=document.getElementById("opt"),opt={},optSrc=null;
@@ -558,25 +639,25 @@ document.getElementById("o-ajout").onclick=function(){
   if(opt.l.length)det.push("+ "+opt.l.map(function(j){return SUPL[j]}).join(", "));
   if(document.getElementById("o-piq").checked)det.push("sauce piquante");
   var x=prixOpt();
-  etat.cmd.push({nom:opt.p[0]+" · "+TAILLES[opt.t]+" "+CM[opt.t]+" cm",det:det.join(" · "),sp:x,liv:x});
-  majPanier();optEl.hidden=true;
+  ajouter({nom:opt.p[0]+" · "+TAILLES[opt.t]+" "+CM[opt.t]+" cm",det:det.join(" · "),sp:x,liv:x});optEl.hidden=true;
   if(optSrc){var b=optSrc;b.classList.add("ok");b.textContent="✓";setTimeout(function(){b.classList.remove("ok");b.textContent="+"},900);b.focus()}
 };
 var voile=document.getElementById("voile");
-document.getElementById("ouvrir").onclick=function(){voile.hidden=false;document.getElementById("fermer").focus()};
+document.getElementById("ouvrir").onclick=function(){ouvrirTicket()};
 document.getElementById("fermer").onclick=function(){voile.hidden=true};
-document.getElementById("vider").onclick=function(){etat.cmd=[];majPanier();voile.hidden=true};
 voile.addEventListener("click",function(e){if(e.target===voile)voile.hidden=true});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){voile.hidden=true;optEl.hidden=true}});
 
 function appliquerMode(){
-  document.querySelectorAll(".mode button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===etat.mode)});
+  document.querySelectorAll(".mode button,.choix-mode button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===etat.mode)});
+  document.getElementById("cpBox").hidden=etat.mode!=="liv";
+  document.getElementById("bt-hero").textContent=etat.mode==="sp"?"Voir la carte":"Commander";
   document.querySelectorAll("[data-sp]").forEach(function(el){el.textContent=eur(+el.dataset[cle()])});
-  document.getElementById("grill-mode").textContent={sp:"Prix sur place. Choisissez « Livraison » en haut pour voir les tarifs livrés.",emp:"Prix à emporter, identiques au sur place. Choisissez « Livraison » en haut pour les tarifs livrés.",liv:"Prix en livraison. Choisissez « Sur place » ou « À emporter » en haut pour les tarifs au comptoir."}[etat.mode];
+  document.getElementById("grill-mode").textContent={sp:"Prix sur place et à emporter. Choisissez « Livraison » en haut pour voir les tarifs livrés.",emp:"Prix à emporter. Touchez + pour ajouter à votre commande.",liv:"Prix en livraison. Touchez + pour ajouter à votre commande."}[etat.mode];
   majPanier();
   try{localStorage.setItem("pgi-mode",etat.mode)}catch(_){}
 }
-document.querySelectorAll(".mode button").forEach(function(b){b.onclick=function(){etat.mode=b.dataset.mode;appliquerMode()}});
+document.querySelectorAll(".mode button,.choix-mode button").forEach(function(b){b.onclick=function(){etat.mode=b.dataset.mode;appliquerMode();if(b.closest(".choix-mode")&&etat.mode==="liv")document.getElementById("cpHero").focus()}});
 document.querySelectorAll(".tailles button").forEach(function(b){b.onclick=function(){
   etat.taille=+b.dataset.t;
   document.querySelectorAll(".tailles button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
@@ -592,7 +673,7 @@ document.getElementById("q").addEventListener("input",function(){
 });
 try{var m=localStorage.getItem("pgi-mode");if(m==="liv"||m==="sp"||m==="emp")etat.mode=m}catch(_){}
 appliquerMode();
-document.getElementById("voir-emp").onclick=function(){etat.mode="emp";appliquerMode();document.getElementById("grill").scrollIntoView()};
+document.getElementById("voir-emp").onclick=function(){etat.mode="emp";appliquerMode();document.getElementById("pizzas").scrollIntoView()};
 
 /* Horaires : lundi au samedi 11h-15h et 17h30-22h, fermé le dimanche */
 var JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"],CRENEAUX=[[660,900],[1050,1320]];
@@ -612,9 +693,103 @@ function majEtat(){
     txt=proch;
   }
   document.querySelectorAll("[data-etat]").forEach(function(el){el.className="etat "+(ouvert?"ouvert":"ferme");el.querySelector("span").textContent=txt});
-  document.getElementById("horaires").innerHTML=[1,2,3,4,5,6,0].map(function(j){return '<span'+(j===n.j?' class="auj"':'')+'>'+JOURS[j]+'</span><span'+(j===n.j?' class="auj"':'')+'>'+(j===0?"Fermé":"11h – 15h · 17h30 – 22h")+'</span>'}).join("");
+  document.getElementById("horaires").innerHTML='<span>Lundi – samedi</span><span>11h – 15h · 17h30 – 22h</span><span>Dimanche</span><span>Fermé</span>';
 }
 majEtat();setInterval(majEtat,60000);
+
+/* Zone de livraison (à confirmer avec le gérant) */
+var ZONES={"91630":"Marolles-en-Hurepoix, Guibeville, Cheptainville, Leudeville"};
+var cpMsg=document.getElementById("cpMsg");
+function verifCp(){
+  var v=document.getElementById("cpHero").value.trim();
+  if(!/^\d{5}$/.test(v)){cpMsg.className="cp-msg non";cpMsg.textContent="Entrez les 5 chiffres de votre code postal.";return}
+  if(ZONES[v]){cpMsg.className="cp-msg oui";cpMsg.textContent="✓ On livre au "+v+". C'est parti !";document.getElementById("f-cp").value=v;
+    setTimeout(function(){document.getElementById("pizzas").scrollIntoView()},600)}
+  else{cpMsg.className="cp-msg non";cpMsg.innerHTML="On ne livre pas encore au "+esc(v)+". Vous pouvez quand même commander à emporter.<br><button type=\"button\" class=\"alt\" id=\"cpAlt\">Commander à emporter</button>";
+    document.getElementById("cpAlt").onclick=function(){etat.mode="emp";appliquerMode();document.getElementById("pizzas").scrollIntoView()}}
+}
+document.getElementById("cpOk").onclick=verifCp;
+document.getElementById("cpHero").addEventListener("keydown",function(e){if(e.key==="Enter")verifCp()});
+
+/* Créneaux de retrait / livraison */
+function creneauxDispo(modeCmd){
+  var n=maintenantParis(),delai=modeCmd==="liv"?45:20,out=[];
+  for(var d=0;d<8&&!out.length;d++){
+    var j=(n.j+d)%7;if(j===0)continue;
+    var jour=d===0?"Aujourd'hui":d===1?"Demain":JOURS[j];
+    CRENEAUX.forEach(function(c){
+      var debut=d===0?Math.max(c[0]+(modeCmd==="liv"?30:15),Math.ceil((n.m+delai)/15)*15):c[0]+(modeCmd==="liv"?30:15);
+      for(var m=debut;m<=c[1]-15;m+=15)out.push({jour:jour,d:d,m:m});
+    });
+  }
+  return out;
+}
+function ouvertMaintenant(){var n=maintenantParis();return n.j!==0&&CRENEAUX.some(function(c){return n.m>=c[0]&&n.m<c[1]-15})}
+function majQuand(){
+  var sel=document.getElementById("f-quand"),avant=sel.value,cr=creneauxDispo(etat.modeCmd),h="";
+  if(ouvertMaintenant())h+='<option value="asap">Dès que possible ('+(etat.modeCmd==="liv"?"35-45 min":"15-20 min")+')</option>';
+  else{var o=null;var n=maintenantParis();for(var d=0;d<8&&!o;d++){var j=(n.j+d)%7;if(j===0)continue;for(var k=0;k<CRENEAUX.length;k++){if(d>0||n.m<CRENEAUX[k][0]){o=(d===0?"aujourd'hui":d===1?"demain":JOURS[j].toLowerCase())+" à "+hm(CRENEAUX[k][0]);break}}}
+    h+='<option value="ouv">Dès l\'ouverture, '+o+'</option>'}
+  h+=cr.map(function(c){var t=(c.d===0?"":c.jour+" ")+hm(c.m);return '<option value="'+c.d+"-"+c.m+'">'+t+'</option>'}).join("");
+  sel.innerHTML=h;if([].some.call(sel.options,function(o){return o.value===avant}))sel.value=avant;
+}
+
+/* Ticket */
+etat.modeCmd="emp";
+function champsOk(){
+  var ok=true,manque=[];
+  var pr=document.getElementById("f-prenom").value.trim(),tel=document.getElementById("f-tel").value.replace(/\D/g,"");
+  if(!pr)manque.push("prénom");
+  if(tel.length<10)manque.push("téléphone");
+  var cpe=document.getElementById("f-cperr");cpe.textContent="";document.getElementById("f-cp").classList.remove("bad");
+  if(etat.modeCmd==="liv"){
+    if(!document.getElementById("f-adr").value.trim())manque.push("adresse");
+    var cp=document.getElementById("f-cp").value.trim();
+    if(!cp)manque.push("code postal");
+    else if(cp.length===5&&!ZONES[cp]){ok=false;cpe.textContent="On ne livre pas encore au "+cp+". Passez en « À emporter » pour commander quand même.";document.getElementById("f-cp").classList.add("bad")}
+  }
+  return {ok:ok&&!manque.length&&etat.cmd.length>0,manque:manque};
+}
+function majTicket(){
+  var t=etat.cmd.reduce(function(s,a){return s+prixDe(a)*a.q},0);
+  document.querySelectorAll("[data-fm]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.fm===etat.modeCmd)});
+  document.querySelectorAll("[data-adr]").forEach(function(el){el.hidden=etat.modeCmd!=="liv"});
+  document.getElementById("f-info").textContent=etat.modeCmd==="liv"?"Livré en 35 à 45 min environ, au tarif livraison de la carte.":"Prête en 15 à 20 min environ, au 29 Grande Rue.";
+  document.getElementById("f-pay").textContent=etat.modeCmd==="liv"?"Au livreur":"Au comptoir";
+  var c=champsOk(),bt=document.getElementById("f-envoyer");
+  bt.disabled=!c.ok;bt.textContent="Envoyer la commande, "+eur(t);
+  document.getElementById("f-aide").textContent=!etat.cmd.length?"Votre commande est vide.":c.manque.length?"Remplissez "+c.manque.join(", ")+" pour envoyer.":"";
+}
+function ouvrirTicket(){
+  if(etat.mode==="liv")etat.modeCmd="liv";else etat.modeCmd="emp";
+  if(etat.mode==="sp"){etat.mode="emp";appliquerMode()}
+  var n=new Date();document.getElementById("f-date").textContent="PIZZA GRILL ISTANBUL · "+n.toLocaleDateString("fr-FR")+" "+n.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("f-cmd").hidden=false;document.getElementById("f-ok").hidden=true;
+  majQuand();majTicket();voile.hidden=false;document.getElementById("f-prenom").focus();
+}
+document.getElementById("f-modes").addEventListener("click",function(e){var b=e.target.closest("[data-fm]");if(!b)return;etat.modeCmd=b.dataset.fm;etat.mode=b.dataset.fm;appliquerMode();majQuand();majTicket()});
+["f-prenom","f-tel","f-adr","f-cp"].forEach(function(id){document.getElementById(id).addEventListener("input",majTicket)});
+document.getElementById("f-envoyer").onclick=function(){
+  if(!champsOk().ok)return;
+  var pr=document.getElementById("f-prenom").value.trim(),tel=document.getElementById("f-tel").value.trim(),sel=document.getElementById("f-quand");
+  var num="#"+(1000+Math.floor(Math.random()*9000)),liv=etat.modeCmd==="liv";
+  var t=etat.cmd.reduce(function(s,a){return s+prixDe(a)*a.q},0),trait="------------------------";
+  var r=["COMMANDE "+num+" - "+(liv?"LIVRAISON":"À EMPORTER"),sel.options[sel.selectedIndex].text,pr+" - "+tel];
+  if(liv)r.push(document.getElementById("f-adr").value.trim()+", "+document.getElementById("f-cp").value.trim());
+  r.push(trait);
+  etat.cmd.forEach(function(a){r.push(a.q+" x "+a.nom+"  "+eur(prixDe(a)*a.q));if(a.det)r.push("    "+a.det)});
+  r.push(trait,"TOTAL "+eur(t)+", paiement "+(liv?"au livreur":"au comptoir"));
+  var note=document.getElementById("f-note").value.trim();if(note)r.push("Note : "+note);
+  document.getElementById("ok-titre").textContent="Merci "+pr+" !";
+  document.getElementById("ok-num").textContent=num;
+  var asap=sel.value==="asap";var quandTxt=sel.options[sel.selectedIndex].text;quandTxt=quandTxt.charAt(0).toLowerCase()+quandTxt.slice(1);
+  document.getElementById("ok-delai").textContent=liv?(asap?"Votre commande arrive dans 35 à 45 min.":"Livraison prévue : "+quandTxt+"."):(asap?"Votre commande sera prête dans 15 à 20 min.":"Retrait prévu : "+quandTxt+".");
+  document.getElementById("ok-tel").textContent="On vous appelle si besoin au "+tel+".";
+  document.getElementById("ok-recu").textContent=r.join("\n");
+  document.getElementById("f-cmd").hidden=true;document.getElementById("f-ok").hidden=false;
+  document.getElementById("ok-fermer").focus();
+};
+document.getElementById("ok-fermer").onclick=function(){etat.cmd=[];document.getElementById("f-note").value="";majPanier();voile.hidden=true};
 
 /* Braises qui montent du grill */
 var cv=document.getElementById("braises"),ctx=cv.getContext("2d"),pts=[],W,H,dpr=Math.min(window.devicePixelRatio||1,2);
