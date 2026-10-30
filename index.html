@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pizza Maison Lardy</title>
-<meta name="description" content="Pizza Maison Lardy : pizzas fines et artisanales, taille unique 33 cm, pâte maison. Uniquement en livraison à Lardy, Janville, Bouray, Cheptainville, Chamarande et Torfou.">
+<meta name="description" content="Pizza Maison Lardy : pizzas fines et artisanales, taille unique 33 cm, pâte maison. En livraison (Lardy, Janville, Bouray, Cheptainville, Chamarande, Torfou) ou à emporter. Pas de consommation sur place.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
@@ -113,12 +113,40 @@ h1,h2,h3{text-wrap:balance}
 
 /* Pizza dessinée */
 .assiette{position:relative;max-width:500px;margin:0 auto;width:100%}
-.assiette .nappe{position:absolute;inset:6% 3% 10% 9%;border-radius:18px;transform:rotate(6deg);
+.assiette .nappe{position:absolute;inset:4% 0 4% 4%;border-radius:18px;transform:rotate(6deg);
   background:repeating-linear-gradient(0deg,rgba(194,58,46,.55) 0 18px,transparent 18px 36px),repeating-linear-gradient(90deg,rgba(194,58,46,.55) 0 18px,#fbf3e2 18px 36px);box-shadow:0 18px 30px -16px rgba(40,20,8,.55)}
 .assiette svg{position:relative;width:100%;height:auto;display:block;filter:drop-shadow(0 16px 18px rgba(40,20,8,.35))}
 .assiette .mot-main{position:absolute;right:-2%;top:2%;font-family:var(--f-main);font-weight:700;font-size:clamp(24px,3.6vw,32px);line-height:1;color:var(--bordeaux);transform:rotate(8deg);text-align:center}
 .assiette .mot-main svg{width:60px;height:40px;filter:none;margin:4px auto 0;display:block}
 @media(max-width:880px){.assiette{max-width:300px;margin-top:18px}.assiette .mot-main{right:-8%;top:-4%;font-size:23px}}
+
+/* Photo du hero, posée sur la nappe */
+.assiette .photo{position:relative;display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:50%;border:10px solid #fbf3e2;box-shadow:0 18px 30px -12px rgba(40,20,8,.55),0 0 0 1px rgba(0,0,0,.06);background:#e8d3ad}
+.assiette .photo + svg{display:none}
+.assiette .cote{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) rotate(-3deg);background:var(--bordeaux);color:var(--creme);font-family:var(--f-script);font-weight:700;font-size:26px;line-height:1;padding:6px 16px 8px;border-radius:999px;box-shadow:0 4px 0 var(--bordeaux-f)}
+
+/* Mode : livraison ou à emporter */
+.choix-mode{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.choix-mode button{background:#fff;border:2px solid var(--trait);border-radius:14px;padding:11px 12px 9px;text-align:left;cursor:pointer;font-family:var(--f-titre);font-weight:800;font-size:16px;letter-spacing:.03em;text-transform:uppercase;color:var(--encre);line-height:1.15}
+.choix-mode button small{display:block;font-family:var(--f-txt);font-weight:500;font-style:italic;font-size:15.5px;text-transform:none;letter-spacing:0;color:var(--encre-2);margin-top:3px}
+.choix-mode button[aria-pressed=true]{background:var(--bordeaux);border-color:var(--bordeaux);color:var(--creme)}
+.choix-mode button[aria-pressed=true] small{color:#f0d9c9}
+.pas-sur-place{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1px dashed var(--trait);font-size:16.5px;color:var(--encre-2)}
+.pas-sur-place svg{width:18px;height:18px;flex:none;color:var(--rouge)}
+.retrait{font-size:18px;color:var(--encre)}
+.retrait b{font-family:var(--f-titre);font-weight:800}
+
+/* Polaroïds : le fait maison */
+.atelier{padding-block:50px 20px}
+.polas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:6px}
+@media(max-width:900px){.polas{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+.pola{background:#fff;padding:10px 10px 12px;box-shadow:0 12px 24px -12px rgba(40,20,8,.5),0 1px 2px rgba(0,0,0,.08);position:relative}
+.pola:nth-child(odd){transform:rotate(-2deg)}.pola:nth-child(even){transform:rotate(1.6deg);margin-top:14px}
+.pola::before{content:"";position:absolute;left:50%;top:-11px;width:76px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(236,220,180,.85);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.pola img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e8d3ad}
+.pola figcaption{font-family:var(--f-main);font-weight:500;font-size:22px;line-height:1.05;color:var(--encre);text-align:center;margin-top:8px}
+@media(max-width:600px){.pola figcaption{font-size:19px}.pola{padding:7px 7px 9px}}
+.credit{text-align:center;font-size:13px;color:var(--encre-2);margin-top:18px;font-family:system-ui,-apple-system,sans-serif;opacity:.8}
 
 /* Vichy */
 .vichy{height:16px;background:repeating-linear-gradient(90deg,var(--vichy) 0 16px,transparent 16px 32px),repeating-linear-gradient(0deg,rgba(194,58,46,.55) 0 8px,#fbf3e2 8px 16px);opacity:.9}
@@ -241,6 +269,9 @@ section.bloc{padding-block:56px}
 .etapes li{display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:start;counter-increment:e;font-size:19px;color:var(--encre-2)}
 .etapes li::before{content:counter(e);width:46px;height:46px;border-radius:50%;background:var(--bordeaux);color:var(--creme);display:grid;place-items:center;font-family:var(--f-titre);font-weight:900;font-size:21px;line-height:1;box-shadow:inset 0 0 0 3px var(--creme),0 0 0 2px var(--bordeaux)}
 .etapes b{font-family:var(--f-titre);font-weight:800;text-transform:uppercase;letter-spacing:.03em;display:block;color:var(--encre);font-size:16px}
+.emp-carte{background:var(--papier);border:1px solid var(--trait);border-radius:18px;padding:20px 22px;margin-bottom:16px}
+.emp-carte h3{font-family:var(--f-titre);font-weight:800;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--encre-2);margin-bottom:8px}
+.emp-carte p{font-size:18px}
 .zone{background:var(--papier);border:1px solid var(--trait);border-radius:18px;padding:20px 22px}
 .zone h3,.horaires h3{font-family:var(--f-titre);font-weight:800;font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--encre-2);margin-bottom:10px}
 .zone ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
@@ -347,7 +378,7 @@ footer .marque{margin-bottom:10px}
 </header>
 <nav class="rubriques" aria-label="Rubriques">
   <div class="w">
-    <a href="#pizzas">Nos pizzas</a><a href="#souffle">Recettes soufflées</a><a href="#boissons">Boissons</a><a href="#livraison">Livraison</a><a href="#infos">Infos</a>
+    <a href="#pizzas">Nos pizzas</a><a href="#souffle">Recettes soufflées</a><a href="#boissons">Boissons</a><a href="#livraison">Livraison &amp; retrait</a><a href="#infos">Infos</a>
   </div>
 </nav>
 
@@ -362,11 +393,19 @@ footer .marque{margin-bottom:10px}
       <span class="fine">Pizza fine et artisanale</span>
       <span class="taille">Taille unique · 33 cm</span>
     </div>
-    <p class="chapo">Pâte maison, ingrédients frais, recettes de famille. Uniquement en livraison, le soir, du mardi au samedi.</p>
+    <p class="chapo">Pâte maison, ingrédients frais, recettes de famille. En livraison ou à emporter, le soir, du mardi au samedi.</p>
     <div class="commune">
-      <div class="q">Vous êtes à… <small>on livre ces 6 communes</small></div>
-      <div class="villes" id="villes-hero"></div>
-      <div class="commune-msg" id="commune-msg" aria-live="polite"></div>
+      <div class="choix-mode" role="group" aria-label="Comment voulez-vous commander ?">
+        <button type="button" data-mode="liv" aria-pressed="true">Livraison<small>chez vous en 30-45 min</small></button>
+        <button type="button" data-mode="emp" aria-pressed="false">À emporter<small>prête en 15-20 min</small></button>
+      </div>
+      <div id="bloc-liv">
+        <div class="q">Vous êtes à… <small>on livre ces 6 communes</small></div>
+        <div class="villes" id="villes-hero"></div>
+        <div class="commune-msg" id="commune-msg" aria-live="polite"></div>
+      </div>
+      <p class="retrait" id="bloc-emp" hidden>Vous passez la prendre au <b>19 rue des Vignes, à Lardy</b>. On vous dit l'heure en commandant.</p>
+      <div class="pas-sur-place"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 18L18 6" stroke="currentColor" stroke-width="2"/></svg>Pas de salle : pas de consommation sur place.</div>
     </div>
     <div class="actions">
       <a href="#pizzas" class="bt plein">Voir la carte</a>
@@ -375,6 +414,7 @@ footer .marque{margin-bottom:10px}
    </div>
    <div class="assiette" aria-hidden="true">
      <div class="nappe"></div>
+     <img class="photo" src="https://images.unsplash.com/photo-1598346763242-7fbe5769efd9?auto=format&fit=crop&w=1100&q=70" alt="" loading="eager" onerror="this.remove()">
      <svg viewBox="0 0 400 430">
        <defs>
          <radialGradient id="croute" cx="50%" cy="45%" r="55%"><stop offset="78%" stop-color="#e3a95c"/><stop offset="92%" stop-color="#c98538"/><stop offset="100%" stop-color="#a8682a"/></radialGradient>
@@ -403,6 +443,7 @@ footer .marque{margin-bottom:10px}
        <g stroke="#6e3a17" stroke-opacity=".28" stroke-width="2"><line x1="200" y1="16" x2="200" y2="384"/><line x1="16" y1="200" x2="384" y2="200"/><line x1="70" y1="70" x2="330" y2="330"/><line x1="330" y1="70" x2="70" y2="330"/></g>
        <g transform="translate(0 410)"><line x1="16" y1="0" x2="384" y2="0" stroke="#7d1f1d" stroke-width="2" stroke-dasharray="6 6"/><line x1="16" y1="-8" x2="16" y2="8" stroke="#7d1f1d" stroke-width="2"/><line x1="384" y1="-8" x2="384" y2="8" stroke="#7d1f1d" stroke-width="2"/><rect x="152" y="-17" width="96" height="34" rx="17" fill="#f5e8cd"/><text x="200" y="9" text-anchor="middle" font-family="Dancing Script, cursive" font-weight="700" font-size="28" fill="#7d1f1d">33 cm</text></g>
      </svg>
+     <span class="cote">33 cm</span>
      <div class="mot-main">Faites<br>avec amour<svg viewBox="0 0 60 40"><path d="M50 4C40 20 26 30 8 32" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M8 32l9-7M8 32l10 4" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
    </div>
   </div>
@@ -412,9 +453,18 @@ footer .marque{margin-bottom:10px}
 <div class="w engag">
   <div class="eng"><span class="ic"><svg viewBox="0 0 28 28" aria-hidden="true"><ellipse cx="14" cy="17" rx="10" ry="6" fill="#f5e8cd"/><path d="M6 15c2-6 14-6 16 0" fill="#f5e8cd"/><path d="M9 14c3-2 7-2 10 0" stroke="#7d1f1d" stroke-width="1.2" fill="none"/></svg></span><div><b>Pâte maison</b><span>et ingrédients frais</span></div></div>
   <div class="eng"><span class="ic"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4l2.9 6 6.6.9-4.8 4.6 1.2 6.5L14 18.9 8.1 22l1.2-6.5L4.5 10.9l6.6-.9z" fill="#f5e8cd"/></svg></span><div><b>Produits de qualité</b><span>chèvre, gorgonzola, raclette…</span></div></div>
-  <div class="eng"><span class="ic"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="7" cy="20" r="3.4" fill="none" stroke="#f5e8cd" stroke-width="2"/><circle cx="21" cy="20" r="3.4" fill="none" stroke="#f5e8cd" stroke-width="2"/><path d="M7 20h7l3-8h4M17 12l4 8M12 12h5" stroke="#f5e8cd" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="9" width="7" height="6" rx="1" fill="#f5e8cd"/></svg></span><div><b>Uniquement en livraison</b><span>chez vous, encore chaude</span></div></div>
+  <div class="eng"><span class="ic"><svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="7" cy="20" r="3.4" fill="none" stroke="#f5e8cd" stroke-width="2"/><circle cx="21" cy="20" r="3.4" fill="none" stroke="#f5e8cd" stroke-width="2"/><path d="M7 20h7l3-8h4M17 12l4 8M12 12h5" stroke="#f5e8cd" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="9" width="7" height="6" rx="1" fill="#f5e8cd"/></svg></span><div><b>Livraison ou à emporter</b><span>pas de consommation sur place</span></div></div>
 </div>
 <div class="vichy" aria-hidden="true"></div>
+
+<section class="atelier">
+  <div class="w">
+    <div class="ruban"><h2><svg aria-hidden="true"><use href="#i-branche"/></svg>Fait maison<svg class="d" aria-hidden="true"><use href="#i-branche"/></svg></h2></div>
+    <p class="ent-p">Depuis 2021, la même règle : <em>tout part de la pâte</em>.</p>
+    <div class="polas"><figure class="pola"><img src="https://images.unsplash.com/photo-1532460734809-e7f8475ca917?auto=format&fit=crop&w=600&q=70" alt="La pâte, pétrie à la main" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>La pâte, pétrie à la main</figcaption></figure><figure class="pola"><img src="https://images.unsplash.com/photo-1537734796389-e1fc293cf856?auto=format&fit=crop&w=600&q=70" alt="Un pâton par pizza" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Un pâton par pizza</figcaption></figure><figure class="pola"><img src="https://images.unsplash.com/photo-1626089738010-44fd772d0d4d?auto=format&fit=crop&w=600&q=70" alt="Fine, 33 cm, bien garnie" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Fine, 33 cm, bien garnie</figcaption></figure><figure class="pola"><img src="https://images.unsplash.com/photo-1536622308015-0740925b8221?auto=format&fit=crop&w=600&q=70" alt="Direction le four" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>Direction le four</figcaption></figure></div>
+    <p class="credit">Photos d'illustration (Unsplash), à remplacer par celles de la pizzeria.</p>
+  </div>
+</section>
 
 <section class="bloc" id="pizzas">
   <div class="w">
@@ -468,25 +518,30 @@ footer .marque{margin-bottom:10px}
 
 <section class="bloc" id="livraison">
   <div class="w">
-    <div class="ruban"><h2><svg aria-hidden="true"><use href="#i-branche"/></svg>La livraison<svg class="d" aria-hidden="true"><use href="#i-branche"/></svg></h2></div>
-    <p class="ent-p">Pas de salle, pas de comptoir : tout est préparé pour arriver <em>chaud chez vous</em>.</p>
+    <div class="ruban"><h2><svg aria-hidden="true"><use href="#i-branche"/></svg>Livraison &amp; retrait<svg class="d" aria-hidden="true"><use href="#i-branche"/></svg></h2></div>
+    <p class="ent-p">On vous livre, ou vous passez la prendre. Pas de salle, donc <em>pas de consommation sur place</em>.</p>
     <div class="liv">
       <div>
         <ol class="etapes">
           <li><span><b>Composez votre commande</b>Touchez + sur la carte. Un ingrédient en plus ou en moins ? Ça se règle en ligne.</span></li>
-          <li><span><b>Choisissez l'heure</b>Dès que possible, ou à l'heure qui vous arrange ce soir.</span></li>
-          <li><span><b>On vous livre</b>Vous réglez au livreur. Vous préférez appeler ? Le 06 43 68 54 53, mêmes prix.</span></li>
+          <li><span><b>Livraison ou à emporter</b>Choisissez, puis l'heure : dès que possible ou quand ça vous arrange.</span></li>
+          <li><span><b>On livre, ou vous passez</b>Vous réglez au livreur ou au retrait. Vous préférez appeler ? Le 06 43 68 54 53, mêmes prix.</span></li>
         </ol>
         <p style="margin-top:22px;text-align:center"><a href="#pizzas" class="bt plein">Je commande</a></p>
       </div>
       <div>
+        <div class="emp-carte">
+          <h3>À emporter</h3>
+          <p><b>19 rue des Vignes, 91510 Lardy</b><br>Prête en 15 à 20 min. Vous payez en la récupérant.</p>
+          <p class="f-info">Pas de salle : les pizzas se dégustent chez vous.</p>
+        </div>
         <div class="zone">
           <h3>On livre à</h3>
           <ul id="l-zone"></ul>
           <p class="f-info">Votre commune n'y est pas ? Appelez, on verra ce qu'on peut faire.</p>
         </div>
         <div class="horaires">
-          <h3>Horaires de livraison</h3>
+          <h3>Horaires</h3>
           <table><tbody id="l-horaires"></tbody></table>
           <span class="etat" data-etat><i></i><span>Horaires</span></span>
         </div>
@@ -499,7 +554,7 @@ footer .marque{margin-bottom:10px}
   <div class="w" style="padding-block:44px 10px">
     <div class="infos">
       <div class="info"><h3>Téléphone</h3><a class="gros" href="tel:+33643685453">06 43 68 54 53</a><p style="font-size:17px;opacity:.85;margin-top:4px">Pour commander ou connaître la pizza du moment.</p></div>
-      <div class="info"><h3>La cuisine</h3><p>19 rue des Vignes<br>91510 Lardy</p><p style="font-size:17px;opacity:.85">Uniquement en livraison.</p></div>
+      <div class="info"><h3>Retrait à emporter</h3><p>19 rue des Vignes<br>91510 Lardy</p><p style="font-size:17px;opacity:.85">Livraison ou à emporter, pas de consommation sur place.</p></div>
       <div class="info"><h3>Suivez-nous</h3><p>Les pizzas du moment et les nouveautés sur Instagram et Facebook.</p><a class="lien" href="https://www.instagram.com/pizzamaisonlardy/" target="_blank" rel="noopener">@pizzamaisonlardy →</a></div>
     </div>
     <footer><a href="#haut" class="marque"><span class="rond-logo" aria-hidden="true"></span><span class="mots"><span class="l1">Pizza <i>Maison</i></span><span class="l2">Lardy · depuis 2021</span></span></a><br>Maquette © Archipel Digital, reproduction interdite sans accord. Prix repris de la carte du restaurant.</footer>
@@ -530,20 +585,22 @@ footer .marque{margin-bottom:10px}
       <div class="f-date" id="f-date"></div>
       <ul id="f-liste"></ul>
       <div class="total">Total<span id="f-tot">0,00 €</span></div>
-      <p class="f-info" style="margin-top:-8px">Livraison uniquement, en 30 à 45 min environ.</p>
+      <div class="f-bloc" style="margin-top:0"><div class="o-titre">Comment ?</div>
+        <div class="puces" id="f-modes"><button type="button" data-fm="liv" aria-pressed="true">Livraison</button><button type="button" data-fm="emp" aria-pressed="false">À emporter</button></div>
+        <p class="f-info" id="f-info"></p></div>
       <div class="f-bloc"><div class="o-titre">Vous</div>
         <div class="champs">
           <input type="text" id="f-prenom" placeholder="Prénom" autocomplete="given-name">
           <input type="tel" id="f-tel" placeholder="Téléphone" autocomplete="tel">
-          <input type="text" id="f-adr" class="large" placeholder="Adresse, étage, code" autocomplete="street-address">
-          <select id="f-ville" class="large" aria-label="Commune"></select>
+          <input type="text" id="f-adr" class="large" placeholder="Adresse, étage, code" autocomplete="street-address" data-adr>
+          <select id="f-ville" class="large" aria-label="Commune" data-adr></select>
         </div>
         <p class="f-err" id="f-villeerr" aria-live="polite"></p></div>
       <div class="f-bloc"><label class="o-titre" for="f-quand">Quand ?</label><select id="f-quand"></select></div>
       <div class="f-bloc"><div class="o-titre">Paiement</div>
-        <div class="puces"><button type="button" aria-pressed="true">Au livreur</button><button type="button" disabled>Carte en ligne</button></div>
+        <div class="puces"><button type="button" id="f-pay" aria-pressed="true">Au livreur</button><button type="button" disabled>Carte en ligne</button></div>
         <p class="f-info">Le paiement en ligne arrive bientôt.</p></div>
-      <p class="f-alcool" id="f-alcool" hidden>Votre commande contient de l'alcool : une pièce d'identité pourra vous être demandée à la livraison.</p>
+      <p class="f-alcool" id="f-alcool" hidden>Votre commande contient de l'alcool : une pièce d'identité pourra vous être demandée.</p>
       <textarea id="f-note" placeholder="Une précision ? (bien cuite, sonner au portail, parfum de la canette…)"></textarea>
       <div class="f-envoi">
         <button type="button" class="bt plein" id="f-envoyer">Envoyer la commande</button>
@@ -589,7 +646,7 @@ var HOR={2:[1080,1260],3:[1080,1260],4:[1080,1260],5:[1110,1290],6:[1110,1290]};
 var JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 var TEL="06 43 68 54 53";
 
-var etat={cmd:[],ville:null,filtre:"tout",q:""};
+var etat={cmd:[],ville:null,filtre:"tout",q:"",mode:"liv"};
 function $(i){return document.getElementById(i)}
 function eur(n){return n.toFixed(2).replace(".",",")+" €"}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -639,6 +696,16 @@ $("villes-hero").addEventListener("click",function(e){
 });
 try{var v=localStorage.getItem("pml-ville");if(v!==null&&v!==""&&ZONES[+v])etat.ville=+v}catch(_){}
 majVilles();
+
+/* Livraison ou à emporter */
+function appliquerMode(){
+  document.querySelectorAll("[data-mode]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.mode===etat.mode)});
+  $("bloc-liv").hidden=etat.mode!=="liv";$("bloc-emp").hidden=etat.mode!=="emp";
+  try{localStorage.setItem("pml-mode",etat.mode)}catch(_){}
+}
+document.querySelectorAll("[data-mode]").forEach(function(b){b.onclick=function(){etat.mode=b.dataset.mode;appliquerMode()}});
+try{var md=localStorage.getItem("pml-mode");if(md==="emp"||md==="liv")etat.mode=md}catch(_){}
+appliquerMode();
 
 /* Panier */
 function total(){return etat.cmd.reduce(function(s,a){return s+a.px*a.q},0)}
@@ -741,10 +808,11 @@ majEtat();setInterval(majEtat,60000);
 
 function majQuand(){
   var sel=$("f-quand"),avant=sel.value,n=maintenant(),h="",out=[];
-  if(ouvertMaintenant()&&n.m<HOR[n.j][1]-30)h+='<option value="asap">Dès que possible (30-45 min)</option>';
+  var liv=etat.mode==="liv";
+  if(ouvertMaintenant()&&n.m<HOR[n.j][1]-(liv?30:15))h+='<option value="asap">Dès que possible ('+(liv?"30-45 min":"15-20 min")+')</option>';
   for(var d=0,trouves=0;d<8&&trouves<2;d++){
     var j=(n.j+d)%7,c=HOR[j];if(!c)continue;
-    var deb=c[0]+30;if(d===0)deb=Math.max(deb,Math.ceil((n.m+45)/15)*15);
+    var deb=c[0]+(liv?30:15);if(d===0)deb=Math.max(deb,Math.ceil((n.m+(liv?45:20))/15)*15);
     var avantNb=out.length;
     for(var m=deb;m<=c[1];m+=15)out.push({d:d,j:j,m:m});
     if(out.length>avantNb)trouves++;
@@ -761,11 +829,18 @@ function champsOk(){
   var manque=[],tel=$("f-tel").value.replace(/\D/g,"");
   if(!$("f-prenom").value.trim())manque.push("prénom");
   if(tel.length<10)manque.push("téléphone");
-  if(!$("f-adr").value.trim())manque.push("adresse");
-  if($("f-ville").value==="")manque.push("commune");
+  if(etat.mode==="liv"){
+    if(!$("f-adr").value.trim())manque.push("adresse");
+    if($("f-ville").value==="")manque.push("commune");
+  }
   return{ok:!manque.length&&etat.cmd.length>0,manque:manque};
 }
 function majTicket(){
+  var liv=etat.mode==="liv";
+  document.querySelectorAll("[data-fm]").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.fm===etat.mode)});
+  document.querySelectorAll("[data-adr]").forEach(function(el){el.hidden=!liv});
+  $("f-info").textContent=liv?"Livré en 30 à 45 min environ.":"Prête en 15 à 20 min, à récupérer au 19 rue des Vignes, Lardy. Pas de consommation sur place.";
+  $("f-pay").textContent=liv?"Au livreur":"Au retrait";
   var c=champsOk(),bt=$("f-envoyer");
   bt.disabled=!c.ok;bt.textContent="Envoyer la commande · "+eur(total());
   $("f-aide").textContent=!etat.cmd.length?"Votre commande est vide.":c.manque.length?"Remplissez "+c.manque.join(", ")+" pour envoyer.":"";
@@ -780,19 +855,22 @@ $("fermer").onclick=function(){voile.hidden=true};
 voile.addEventListener("click",function(e){if(e.target===voile)voile.hidden=true});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){voile.hidden=true;optEl.hidden=true}});
 ["f-prenom","f-tel","f-adr"].forEach(function(id){$(id).addEventListener("input",majTicket)});
+$("f-modes").addEventListener("click",function(e){var b=e.target.closest("[data-fm]");if(!b)return;etat.mode=b.dataset.fm;appliquerMode();majQuand();majTicket()});
 $("f-ville").addEventListener("change",function(){etat.ville=this.value===""?null:+this.value;majVilles();majTicket()});
 $("f-envoyer").onclick=function(){
   if(!champsOk().ok)return;
-  var pr=$("f-prenom").value.trim(),tel=$("f-tel").value.trim(),sel=$("f-quand"),z=ZONES[+$("f-ville").value];
+  var pr=$("f-prenom").value.trim(),tel=$("f-tel").value.trim(),sel=$("f-quand"),liv=etat.mode==="liv",z=liv?ZONES[+$("f-ville").value]:null;
   var num="#"+(1000+Math.floor(Math.random()*9000)),trait="------------------------",quand=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:"";
-  var r=["COMMANDE "+num+" - LIVRAISON",quand,pr+" - "+tel,$("f-adr").value.trim()+", "+z[1]+" "+z[0],trait];
+  var r=["COMMANDE "+num+" - "+(liv?"LIVRAISON":"À EMPORTER"),quand,pr+" - "+tel];
+  r.push(liv?$("f-adr").value.trim()+", "+z[1]+" "+z[0]:"Retrait au 19 rue des Vignes");r.push(trait);
   etat.cmd.forEach(function(a){r.push(a.q+" x "+a.nom+"  "+eur(a.px*a.q));if(a.det)r.push("    "+a.det)});
-  r.push(trait,"TOTAL "+eur(total())+", paiement au livreur");
-  if(etat.cmd.some(function(a){return a.alcool}))r.push("Alcool : vérifier l'âge à la livraison");
+  r.push(trait,"TOTAL "+eur(total())+", paiement "+(liv?"au livreur":"au retrait"));
+  if(etat.cmd.some(function(a){return a.alcool}))r.push("Alcool : vérifier l'âge");
   var note=$("f-note").value.trim();if(note)r.push("Note : "+note);
   $("ok-titre").textContent="Merci "+pr+" !";$("ok-num").textContent=num;
   var asap=sel.value==="asap";
-  $("ok-delai").textContent=asap?"Vos pizzas arrivent dans 30 à 45 min.":"Livraison prévue : "+quand.charAt(0).toLowerCase()+quand.slice(1)+".";
+  var q=quand.charAt(0).toLowerCase()+quand.slice(1);
+  $("ok-delai").textContent=liv?(asap?"Vos pizzas arrivent dans 30 à 45 min.":"Livraison prévue : "+q+"."):(asap?"Vos pizzas seront prêtes dans 15 à 20 min, au 19 rue des Vignes.":"Retrait prévu : "+q+", au 19 rue des Vignes.");
   $("ok-tel").textContent="On vous appelle si besoin au "+tel+".";
   $("ok-recu").textContent=r.join("\n");
   $("f-cmd").hidden=true;$("f-ok").hidden=false;$("ok-fermer").focus();
