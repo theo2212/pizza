@@ -298,6 +298,8 @@ footer img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:
 .f-ok{text-align:center}
 .f-ok .num{font-size:50px;font-weight:800;color:var(--vert-f);line-height:1.1}
 .f-ok p{margin-top:6px}
+.f-err{color:var(--rouge-f);font-weight:600;font-size:14.5px;margin-top:8px}
+.f-err a{color:inherit}
 .recu{text-align:left;background:var(--marbre);border:2px dashed var(--trait);padding:14px;margin:14px 0;font:13.5px/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 </head>
@@ -312,7 +314,7 @@ footer img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:
   <symbol id="i-four" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V11a9 9 0 0 1 18 0v9z"/><path d="M8 20v-4a4 4 0 0 1 8 0v4M10 6.5c0-1 1-1.5 1-2.5M14 6.5c0-1 1-1.5 1-2.5"/></g></symbol>
 </defs></svg>
 
-<div class="maquette"><div class="w">Maquette réalisée par <b>Archipel Digital</b>, démo non contractuelle · <span class="mail">archipel.digitalfr@gmail.com</span></div></div>
+<div class="maquette"><div class="w"><b>Version de test</b> : les commandes n'arrivent pas encore à la pizzeria. Pour commander, appelez le 01 64 92 12 03. · Archipel Digital</div></div>
 
 <header class="tete">
   <div class="w">
@@ -530,6 +532,7 @@ footer img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:
       <div class="f-envoi">
         <button type="button" class="bt plein" id="f-envoyer">Envoyer la commande</button>
         <p class="f-aide" id="f-aide"></p>
+        <p class="f-err" id="f-err" role="alert" hidden></p>
         <button type="button" class="bt vide" id="fermer">Continuer mes achats</button>
       </div>
     </div>
@@ -538,7 +541,7 @@ footer img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:
       <div class="num" id="ok-num">#0000</div>
       <p id="ok-delai"></p>
       <p id="ok-tel"></p>
-      <p class="f-info" style="margin-top:14px">Démo : voici ce que la pizzeria recevrait sur sa tablette.</p>
+      <p class="f-info" style="margin-top:14px">Votre récapitulatif :</p>
       <pre class="recu" id="ok-recu"></pre>
       <button type="button" class="bt plein" id="ok-fermer">Fermer</button>
     </div>
@@ -936,21 +939,40 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){voile.hidde
 ["f-prenom","f-tel","f-adr"].forEach(function(id){$(id).addEventListener("input",majTicket)});
 $("f-modes").addEventListener("click",function(e){var b=e.target.closest("[data-fm]");if(!b)return;etat.mode=b.dataset.fm;appliquerMode();majQuand();majTicket()});
 $("f-ville").addEventListener("change",function(){etat.ville=this.value===""?null:+this.value;majVilles();majTicket()});
+/* Envoi de la commande à la pizzeria (base Supabase d'Archipel Digital) */
+var SUPABASE_URL="https://lreitfbmgwqqzzoomhxb.supabase.co",SUPABASE_CLE="sb_publishable_MsM6-FXGiQJyzzIOE_PUCw_dLGxrpgg",RESTO="tosto";
+var envoiEnCours=false;
 $("f-envoyer").onclick=function(){
-  if(!champsOk().ok)return;
+  if(!champsOk().ok||envoiEnCours)return;
   var pr=$("f-prenom").value.trim(),tel=$("f-tel").value.trim(),sel=$("f-quand"),liv=etat.mode==="liv",z=liv?ZONES[etat.ville]:null;
-  var num="#"+(1000+Math.floor(Math.random()*9000)),trait="------------------------",quand=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:"";
-  var r=["COMMANDE "+num+" - "+(liv?"LIVRAISON":"À EMPORTER"),quand,pr+" - "+tel];
-  r.push(liv?$("f-adr").value.trim()+", "+z[1]+" "+z[0]:"Retrait au magasin");r.push(trait);
-  etat.cmd.forEach(function(a){r.push(a.q+" x "+a.nom+"  "+eur(a.px*a.q));if(a.det)r.push("    "+a.det)});
-  r.push(trait,"TOTAL "+eur(total())+", paiement "+(liv?"au livreur":"au retrait"));
-  var note=$("f-note").value.trim();if(note)r.push("Note : "+note);
-  $("ok-titre").textContent="Merci "+pr+" !";$("ok-num").textContent=num;
-  var asap=sel.value==="asap",q=quand.charAt(0).toLowerCase()+quand.slice(1);
-  $("ok-delai").textContent=liv?(asap?"Votre commande arrive dans 30 à 45 minutes.":"Livraison prévue : "+q+"."):(asap?"Votre commande sera prête dans 15 à 20 minutes.":"Retrait prévu : "+q+".");
-  $("ok-tel").textContent="On vous appelle si besoin au "+tel+".";
-  $("ok-recu").textContent=r.join("\n");
-  $("f-cmd").hidden=true;$("f-ok").hidden=false;$("ok-fermer").focus();
+  var quand=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:"Dès que possible",note=$("f-note").value.trim();
+  var paiement=liv?"au livreur":"au retrait";
+  var donnees={mode:etat.mode,quand:quand,prenom:pr,telephone:tel,adresse:liv?$("f-adr").value.trim():null,commune:liv?z[0]+" ("+z[1]+")":null,
+    lignes:etat.cmd.map(function(a){return{q:a.q,nom:a.nom,det:a.det||"",px:a.px}}),total:Math.round(total()*100)/100,paiement:paiement,note:note};
+  var bt=$("f-envoyer"),err=$("f-err");envoiEnCours=true;bt.disabled=true;bt.textContent="Envoi en cours…";err.hidden=true;
+  var ctl=window.AbortController?new AbortController():null,minuteur=setTimeout(function(){if(ctl)ctl.abort()},15000);
+  fetch(SUPABASE_URL+"/rest/v1/rpc/passer_commande",{method:"POST",headers:{"apikey":SUPABASE_CLE,"Content-Type":"application/json"},body:JSON.stringify({p_restaurant:RESTO,p:donnees}),signal:ctl?ctl.signal:undefined})
+  .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j&&j.message||"erreur");return j})})
+  .then(function(j){
+    var num="#"+j.numero,trait="------------------------";
+    var r=["COMMANDE "+num+" - "+(liv?"LIVRAISON":"À EMPORTER"),quand,pr+" - "+tel];
+    r.push(liv?donnees.adresse+", "+z[1]+" "+z[0]:"Retrait au 9 rue des Noblets");r.push(trait);
+    etat.cmd.forEach(function(a){r.push(a.q+" x "+a.nom+"  "+eur(a.px*a.q));if(a.det)r.push("    "+a.det)});
+    r.push(trait,"TOTAL "+eur(total())+", paiement "+paiement);if(note)r.push("Note : "+note);
+    $("ok-titre").textContent="Merci "+pr+" !";$("ok-num").textContent=num;
+    var asap=sel.value==="asap",q=quand.charAt(0).toLowerCase()+quand.slice(1);
+    $("ok-delai").textContent="Votre commande est bien arrivée à la pizzeria. "+(liv?(asap?"Livraison dans 30 à 45 minutes.":"Livraison prévue : "+q+"."):(asap?"Elle sera prête dans 15 à 20 minutes.":"Retrait prévu : "+q+"."));
+    $("ok-tel").textContent="On vous appelle si besoin au "+tel+".";
+    $("ok-recu").textContent=r.join("\n");
+    $("f-cmd").hidden=true;$("f-ok").hidden=false;$("ok-fermer").focus();
+  })
+  .catch(function(e){
+    var m=String(e&&e.message||"");
+    err.innerHTML=/trop de commandes/.test(m)?"Vous avez déjà passé plusieurs commandes. Appelez-nous au <a href=\"tel:+33164921203\">"+TEL+"</a>.":
+      "La commande n'a pas pu partir. Réessayez ou appelez-nous au <a href=\"tel:+33164921203\">"+TEL+"</a>.";
+    err.hidden=false;
+  })
+  .then(function(){clearTimeout(minuteur);envoiEnCours=false;majTicket()});
 };
 $("ok-fermer").onclick=function(){etat.cmd=[];$("f-note").value="";majPanier();voile.hidden=true};
 majPanier();

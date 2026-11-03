@@ -1,3 +1,4 @@
-# Tosto Pizza
+# Tosto Pizza, commandes en ligne (test)
 
-Maquette du site de Tosto Pizza (Saint-Vrain), par Archipel Digital.
+Site Tosto + écran des commandes du resto (commandes.html), branchés sur Supabase.
+Par Archipel Digital.

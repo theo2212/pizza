@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Tosto Pizza · Commandes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Kaushan+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vert:#719440; --vert-f:#56732e; --vert-c:#e7efdc;
+  --noir:#151515; --noir-2:#2a2a2a; --gris:#6b6b6b; --gris-c:#a9a9a9;
+  --marbre:#ececec; --blanc:#fff; --trait:#d8d8d8;
+  --jaune:#f3be4b; --jaune-c:#fdf0cf; --rouge:#de5936; --rouge-f:#b8401f;
+  --f-txt:"Poppins",system-ui,-apple-system,sans-serif;
+  --f-script:"Kaushan Script","Brush Script MT",cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:#e9e9e9 url(img/marbre.jpg) center/cover fixed;color:var(--noir);font-family:var(--f-txt);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;min-height:100vh}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--jaune);outline-offset:2px}
+
+/* Connexion */
+.connexion{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.carte-cx{background:#fff;width:100%;max-width:380px;padding:28px 24px;border:1px solid var(--trait);box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.carte-cx img{width:96px;height:96px;object-fit:contain;mix-blend-mode:multiply;margin:0 auto 6px;display:block}
+.carte-cx h1{font-family:var(--f-script);font-weight:400;font-size:34px;text-align:center;line-height:1.1}
+.carte-cx .sous{text-align:center;color:var(--vert-f);font-weight:600;font-size:12px;letter-spacing:.18em;text-transform:uppercase;margin:4px 0 22px}
+.carte-cx label{display:block;font-size:13px;font-weight:600;margin:12px 0 4px}
+.carte-cx input{width:100%;font:inherit;padding:11px 12px;border:1.5px solid var(--trait);background:#fafafa;border-radius:0}
+.carte-cx input:focus{border-color:var(--vert);outline:none;background:#fff}
+.gros-bt{width:100%;margin-top:18px;background:var(--vert);color:#fff;border:0;font-weight:700;font-size:16px;padding:13px;letter-spacing:.02em}
+.gros-bt:hover{background:var(--vert-f)}
+.gros-bt:disabled{background:var(--gris-c);cursor:wait}
+.erreur{color:var(--rouge-f);font-size:14px;margin-top:10px;min-height:20px}
+.signe{text-align:center;font-size:12px;color:var(--gris);margin-top:18px}
+
+/* Écran */
+.barre{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--trait);box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.barre .w{display:flex;align-items:center;gap:14px;padding:8px 16px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.marque{display:flex;align-items:center;gap:8px}
+.marque img{width:46px;height:46px;object-fit:contain;mix-blend-mode:multiply}
+.marque b{font-family:var(--f-script);font-weight:400;font-size:26px;line-height:1}
+.marque small{display:block;font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--vert-f)}
+.direct{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--gris);margin-left:auto}
+.direct i{width:10px;height:10px;border-radius:50%;background:var(--gris-c)}
+.direct.on{color:var(--vert-f)}.direct.on i{background:#4cae43;box-shadow:0 0 0 4px rgba(76,174,67,.2)}
+.direct.off{color:var(--rouge-f)}.direct.off i{background:var(--rouge)}
+.outils{display:flex;gap:8px;align-items:center}
+.petit-bt{background:#fff;border:1.5px solid var(--trait);font-weight:600;font-size:13.5px;padding:7px 12px;color:var(--noir-2)}
+.petit-bt[aria-pressed=true]{border-color:var(--vert);background:var(--vert-c);color:var(--vert-f)}
+.alerte-son{background:var(--jaune);color:var(--noir);font-weight:600;text-align:center;padding:10px 16px;font-size:15px}
+.alerte-son button{margin-left:8px;background:var(--noir);color:#fff;border:0;padding:6px 12px;font-weight:600}
+
+.colonnes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:16px;max-width:1400px;margin:0 auto;align-items:start}
+.col h2{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:4px 2px 10px}
+.col h2 .nb{background:var(--noir);color:#fff;border-radius:999px;font-size:12.5px;min-width:24px;height:24px;display:grid;place-items:center;padding:0 7px}
+.col[data-col=nouvelle] h2 .nb{background:var(--rouge)}
+.col[data-col=en_preparation] h2 .nb{background:var(--jaune);color:var(--noir)}
+.col[data-col=prete] h2 .nb{background:var(--vert)}
+.vide-col{color:var(--gris);font-size:14px;padding:18px 4px;border:2px dashed var(--trait);text-align:center;background:rgba(255,255,255,.5)}
+@media(max-width:900px){.colonnes{grid-template-columns:1fr}}
+
+.cmd{background:#fff;border:1px solid var(--trait);border-top:5px solid var(--gris-c);padding:14px 14px 12px;margin-bottom:12px;box-shadow:0 6px 16px rgba(0,0,0,.05)}
+.cmd.nouvelle{border-top-color:var(--rouge)}
+.cmd.en_preparation{border-top-color:var(--jaune)}
+.cmd.prete{border-top-color:var(--vert)}
+.cmd.flash{animation:flash 1s ease-in-out 4}
+@keyframes flash{50%{box-shadow:0 0 0 6px rgba(222,89,54,.35)}}
+.cmd-tete{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cmd-num{font-size:26px;font-weight:800;line-height:1}
+.badge{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px}
+.badge.liv{background:var(--noir);color:#fff}
+.badge.emp{background:var(--vert-c);color:var(--vert-f)}
+.cmd-heure{margin-left:auto;font-size:13px;color:var(--gris);text-align:right}
+.cmd-quand{font-weight:700;font-size:15px;margin-top:6px}
+.cmd-quand.urgent{color:var(--rouge-f)}
+.client{margin-top:6px;font-size:14.5px}
+.client a{color:var(--vert-f);font-weight:600;text-decoration:none}
+.lignes{list-style:none;margin:10px 0 8px;border-top:1px dashed var(--trait);border-bottom:1px dashed var(--trait);padding:6px 0}
+.lignes li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;padding:3px 0;font-size:15px}
+.lignes .q{font-weight:800}
+.lignes small{display:block;color:var(--gris);font-size:13px;line-height:1.3}
+.note{background:var(--jaune-c);border-left:4px solid var(--jaune);padding:6px 9px;font-size:14px;margin-bottom:8px}
+.tot{display:flex;justify-content:space-between;font-weight:700;font-size:16px}
+.tot small{font-weight:500;color:var(--gris);font-size:13px}
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.actions button{flex:1;min-width:120px;border:0;font-weight:700;font-size:15px;padding:11px 8px}
+.bt-go{background:var(--vert);color:#fff}
+.bt-go:hover{background:var(--vert-f)}
+.bt-imp{background:#fff;border:1.5px solid var(--noir)!important;color:var(--noir)}
+.bt-annul{flex:0 0 auto!important;min-width:0!important;background:none;color:var(--gris);text-decoration:underline;font-weight:500!important;font-size:13px!important}
+.imprime{font-size:12px;color:var(--vert-f);margin-top:6px}
+
+.termines{max-width:1400px;margin:0 auto;padding:0 16px 40px}
+.termines summary{cursor:pointer;font-weight:600;color:var(--noir-2);padding:8px 0}
+.termines table{width:100%;border-collapse:collapse;background:#fff;font-size:14px}
+.termines td{padding:8px 10px;border-bottom:1px solid var(--trait)}
+.termines button{background:none;border:0;color:var(--vert-f);font-weight:600;text-decoration:underline}
+
+/* Ticket imprimé : rouleau 80 mm */
+#ticket{display:none}
+@media print{
+  @page{size:80mm auto;margin:3mm}
+  body{background:#fff!important}
+  body>*:not(#ticket){display:none!important}
+  #ticket{display:block;width:74mm;font:12px/1.35 ui-monospace,"Courier New",monospace;color:#000}
+  #ticket .c{text-align:center}
+  #ticket .gros{font-size:20px;font-weight:700}
+  #ticket hr{border:0;border-top:1px dashed #000;margin:5px 0}
+  #ticket .l{display:flex;justify-content:space-between;gap:6px}
+  #ticket .det{padding-left:14px}
+  #ticket .encadre{border:2px solid #000;padding:3px;text-align:center;font-weight:700;font-size:15px;margin:4px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Connexion -->
+<main class="connexion" id="vue-cx" hidden>
+  <form class="carte-cx" id="f-cx">
+    <img src="img/logo.jpg" alt="">
+    <h1>Tosto Pizza</h1>
+    <p class="sous">Écran des commandes</p>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="mdp">Mot de passe</label>
+    <input id="mdp" type="password" autocomplete="current-password" required>
+    <button class="gros-bt" id="bt-cx">Se connecter</button>
+    <p class="erreur" id="err-cx" role="alert"></p>
+    <p class="signe">Signé Archipel Digital</p>
+  </form>
+</main>
+
+<!-- Écran des commandes -->
+<div id="vue-ecran" hidden>
+  <header class="barre"><div class="w">
+    <div class="marque"><img src="img/logo.jpg" alt=""><div><b>Tosto Pizza</b><small>Commandes</small></div></div>
+    <span class="direct" id="direct"><i></i><span>Connexion…</span></span>
+    <div class="outils">
+      <button class="petit-bt" id="bt-son" aria-pressed="true">🔔 Son</button>
+      <button class="petit-bt" id="bt-auto" aria-pressed="false" title="Ouvre l'impression dès qu'une commande arrive">🖨 Auto</button>
+      <button class="petit-bt" id="bt-quitter">Déconnexion</button>
+    </div>
+  </div></header>
+  <div class="alerte-son" id="alerte-son" hidden>Touchez l'écran une fois pour activer la sonnerie des commandes <button id="bt-activer">Activer</button></div>
+  <section class="colonnes">
+    <div class="col" data-col="nouvelle"><h2>Nouvelles <span class="nb">0</span></h2><div class="liste"></div></div>
+    <div class="col" data-col="en_preparation"><h2>En préparation <span class="nb">0</span></h2><div class="liste"></div></div>
+    <div class="col" data-col="prete"><h2>Prêtes / en livraison <span class="nb">0</span></h2><div class="liste"></div></div>
+  </section>
+  <details class="termines"><summary id="sum-term">Commandes terminées aujourd'hui (0)</summary><table><tbody id="l-term"></tbody></table></details>
+</div>
+
+<div id="ticket"></div>
+
+<script src="js/supabase.js"></script>
+<script>
+(function(){
+var SUPABASE_URL="https://lreitfbmgwqqzzoomhxb.supabase.co";
+var SUPABASE_CLE="sb_publishable_MsM6-FXGiQJyzzIOE_PUCw_dLGxrpgg";
+var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_CLE,{auth:{persistSession:true,autoRefreshToken:true}});
+
+var CMD={},canal=null,resto=null;
+var prefs={son:true,auto:false};
+try{var p=JSON.parse(localStorage.getItem("tosto-ecran")||"{}");if(typeof p.son==="boolean")prefs.son=p.son;if(typeof p.auto==="boolean")prefs.auto=p.auto}catch(_){}
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function eur(n){return Number(n).toFixed(2).replace(".",",")+" €"}
+function heure(d){return new Date(d).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"})}
+function telAff(t){return String(t).replace(/(\d{2})(?=\d)/g,"$1 ")}
+function sauver(){try{localStorage.setItem("tosto-ecran",JSON.stringify(prefs))}catch(_){}}
+
+/* ---------- Connexion ---------- */
+$("f-cx").addEventListener("submit",async function(e){
+  e.preventDefault();$("err-cx").textContent="";$("bt-cx").disabled=true;$("bt-cx").textContent="Connexion…";
+  var r=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("mdp").value});
+  $("bt-cx").disabled=false;$("bt-cx").textContent="Se connecter";
+  if(r.error){$("err-cx").textContent="E-mail ou mot de passe incorrect.";return}
+  debloquerSon();demarrer();
+});
+$("bt-quitter").onclick=async function(){if(canal)sb.removeChannel(canal);await sb.auth.signOut();location.reload()};
+
+/* ---------- Sonnerie (le navigateur exige un premier toucher pour jouer un son) ---------- */
+var audio=null,sonne=null;
+function debloquerSon(){try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();if(audio.state==="suspended")audio.resume()}catch(_){}$("alerte-son").hidden=true}
+function bip(){
+  if(!prefs.son||!audio)return;
+  var t=audio.currentTime;
+  [0,0.18,0.36].forEach(function(dt,i){var o=audio.createOscillator(),g=audio.createGain();o.type="square";o.frequency.value=i===2?1320:988;
+    g.gain.setValueAtTime(0.0001,t+dt);g.gain.exponentialRampToValueAtTime(0.25,t+dt+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dt+0.15);
+    o.connect(g).connect(audio.destination);o.start(t+dt);o.stop(t+dt+0.16)});
+}
+/* Tant qu'il reste une commande non acceptée, ça sonne toutes les 20 secondes */
+function majSonnerie(){
+  var attente=Object.values(CMD).some(function(c){return c.statut==="nouvelle"});
+  if(attente&&!sonne){bip();sonne=setInterval(bip,20000)}
+  if(!attente&&sonne){clearInterval(sonne);sonne=null}
+}
+$("bt-activer").onclick=debloquerSon;
+document.addEventListener("pointerdown",function(){if(audio&&audio.state==="suspended")audio.resume()},{passive:true});
+$("bt-son").onclick=function(){prefs.son=!prefs.son;this.setAttribute("aria-pressed",prefs.son);sauver();if(prefs.son){debloquerSon();bip()}};
+$("bt-auto").onclick=function(){prefs.auto=!prefs.auto;this.setAttribute("aria-pressed",prefs.auto);sauver()};
+
+/* Garder l'écran de la tablette allumé */
+var verrou=null;
+async function garderAllume(){try{if("wakeLock" in navigator&&document.visibilityState==="visible")verrou=await navigator.wakeLock.request("screen")}catch(_){}}
+document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible"){garderAllume();charger()}});
+
+/* ---------- Commandes ---------- */
+async function demarrer(){
+  $("vue-cx").hidden=true;$("vue-ecran").hidden=false;
+  $("bt-son").setAttribute("aria-pressed",prefs.son);$("bt-auto").setAttribute("aria-pressed",prefs.auto);
+  if(!audio||audio.state!=="running")$("alerte-son").hidden=false;
+  garderAllume();
+  var r=await sb.from("restaurants").select("id,nom").limit(1);
+  resto=r.data&&r.data[0];
+  await charger();
+  ecouter();
+  setInterval(charger,30000); /* filet de sécurité si le direct décroche */
+}
+async function charger(){
+  var depuis=new Date(Date.now()-24*3600*1000).toISOString();
+  var r=await sb.from("commandes").select("*").gte("cree_le",depuis).order("cree_le",{ascending:true});
+  if(r.error){etatDirect("off","Hors ligne");return}
+  var avant=Object.keys(CMD);var nouv=[];
+  r.data.forEach(function(c){if(avant.length&&!CMD[c.id])nouv.push(c.id);CMD[c.id]=c});
+  Object.keys(CMD).forEach(function(id){if(!r.data.some(function(c){return c.id===id}))delete CMD[id]});
+  rendre(nouv);nouv.forEach(arrivee);
+}
+function ecouter(){
+  canal=sb.channel("commandes-"+(resto?resto.id:"x"))
+    .on("postgres_changes",{event:"*",schema:"public",table:"commandes"},function(ev){
+      if(ev.eventType==="DELETE"){delete CMD[ev.old.id];rendre([]);return}
+      var c=ev.new,neuve=!CMD[c.id];CMD[c.id]=c;rendre(neuve?[c.id]:[]);if(neuve)arrivee(c.id);
+    })
+    .subscribe(function(s){
+      if(s==="SUBSCRIBED")etatDirect("on","En direct");
+      else if(s==="CHANNEL_ERROR"||s==="TIMED_OUT"||s==="CLOSED")etatDirect("off","Reconnexion…");
+    });
+}
+function etatDirect(cl,txt){var d=$("direct");d.className="direct "+cl;d.querySelector("span").textContent=txt}
+function arrivee(id){majSonnerie();if(prefs.auto&&CMD[id]&&!CMD[id].imprimee_le)imprimer(id)}
+
+var ORDRE={nouvelle:0,en_preparation:1,prete:2};
+function rendre(flash){
+  var liste=Object.values(CMD).sort(function(a,b){return new Date(a.cree_le)-new Date(b.cree_le)});
+  ["nouvelle","en_preparation","prete"].forEach(function(st){
+    var col=document.querySelector('.col[data-col="'+st+'"]'),cs=liste.filter(function(c){return c.statut===st});
+    col.querySelector(".nb").textContent=cs.length;
+    col.querySelector(".liste").innerHTML=cs.length?cs.map(function(c){return carte(c,flash.indexOf(c.id)>=0)}).join(""):'<p class="vide-col">'+(st==="nouvelle"?"Aucune nouvelle commande.<br>Ça sonnera dès qu'une arrive.":"Rien ici pour l'instant.")+'</p>';
+  });
+  var fin=liste.filter(function(c){return c.statut==="terminee"||c.statut==="annulee"}).reverse();
+  $("sum-term").textContent="Commandes terminées aujourd'hui ("+fin.length+")";
+  $("l-term").innerHTML=fin.map(function(c){return '<tr><td><b>#'+c.numero+'</b></td><td>'+heure(c.cree_le)+'</td><td>'+esc(c.prenom)+'</td><td>'+(c.statut==="annulee"?"Annulée":eur(c.total))+'</td><td><button data-a="reimp" data-id="'+c.id+'">Réimprimer</button></td></tr>'}).join("");
+  var n=liste.filter(function(c){return c.statut==="nouvelle"}).length;
+  document.title=(n?"("+n+") ":"")+"Tosto Pizza · Commandes";
+  majSonnerie();
+}
+function carte(c,flash){
+  var liv=c.mode==="liv",bt="";
+  if(c.statut==="nouvelle")bt='<button class="bt-go" data-a="accepter" data-id="'+c.id+'">Accepter</button>';
+  else if(c.statut==="en_preparation")bt='<button class="bt-go" data-a="prete" data-id="'+c.id+'">'+(liv?"Partie en livraison":"Prête")+'</button>';
+  else bt='<button class="bt-go" data-a="terminee" data-id="'+c.id+'">'+(liv?"Livrée":"Récupérée")+'</button>';
+  var asap=/possible/i.test(c.quand);
+  return '<article class="cmd '+c.statut+(flash?" flash":"")+'">'+
+    '<div class="cmd-tete"><span class="cmd-num">#'+c.numero+'</span><span class="badge '+c.mode+'">'+(liv?"Livraison":"À emporter")+'</span><span class="cmd-heure">reçue à '+heure(c.cree_le)+'</span></div>'+
+    '<div class="cmd-quand'+(asap?" urgent":"")+'">'+esc(c.quand)+'</div>'+
+    '<div class="client"><b>'+esc(c.prenom)+'</b> · <a href="tel:'+esc(c.telephone)+'">'+telAff(c.telephone)+'</a>'+(liv?'<br>'+esc(c.adresse)+', '+esc(c.commune):'')+'</div>'+
+    '<ul class="lignes">'+(c.lignes||[]).map(function(l){return '<li><span class="q">'+(l.q||1)+'×</span><span>'+esc(l.nom)+(l.det?'<small>'+esc(l.det)+'</small>':'')+'</span><span>'+eur((l.px||0)*(l.q||1))+'</span></li>'}).join("")+'</ul>'+
+    (c.note?'<div class="note">📝 '+esc(c.note)+'</div>':'')+
+    '<div class="tot"><span>Total <small>· '+esc(c.paiement)+'</small></span><span>'+eur(c.total)+'</span></div>'+
+    '<div class="actions">'+bt+'<button class="bt-imp" data-a="imp" data-id="'+c.id+'">🖨 Ticket</button>'+(c.statut==="nouvelle"?'<button class="bt-annul" data-a="annuler" data-id="'+c.id+'">Refuser</button>':'')+'</div>'+
+    (c.imprimee_le?'<div class="imprime">✓ Ticket imprimé à '+heure(c.imprimee_le)+'</div>':'')+
+  '</article>';
+}
+async function statut(id,st){
+  var c=CMD[id];if(!c)return;var avant=c.statut;c.statut=st;rendre([]);
+  var r=await sb.from("commandes").update({statut:st}).eq("id",id);
+  if(r.error){c.statut=avant;rendre([]);alert("La commande n'a pas pu être mise à jour. Vérifiez la connexion.")}
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-a]");if(!b)return;var id=b.dataset.id,a=b.dataset.a;
+  debloquerSon();
+  if(a==="accepter"){statut(id,"en_preparation");if(!CMD[id].imprimee_le)imprimer(id)}
+  else if(a==="prete")statut(id,"prete");
+  else if(a==="terminee")statut(id,"terminee");
+  else if(a==="annuler"){if(confirm("Refuser la commande #"+CMD[id].numero+" ? Pensez à prévenir le client au "+telAff(CMD[id].telephone)+"."))statut(id,"annulee")}
+  else if(a==="imp"||a==="reimp")imprimer(id);
+});
+
+/* ---------- Ticket pour l'imprimante (rouleau 80 mm) ---------- */
+function imprimer(id){
+  var c=CMD[id];if(!c)return;var liv=c.mode==="liv",d=new Date(c.cree_le);
+  $("ticket").innerHTML=
+    '<div class="c gros">TOSTO PIZZA</div><div class="c">9 rue des Noblets, Saint-Vrain</div><hr>'+
+    '<div class="encadre">#'+c.numero+' · '+(liv?"LIVRAISON":"À EMPORTER")+'</div>'+
+    '<div class="c">Reçue le '+d.toLocaleDateString("fr-FR",{timeZone:"Europe/Paris"})+' à '+heure(c.cree_le)+'</div>'+
+    '<div class="c"><b>'+esc(c.quand)+'</b></div><hr>'+
+    '<div><b>'+esc(c.prenom)+'</b> - '+telAff(c.telephone)+'</div>'+(liv?'<div>'+esc(c.adresse)+'</div><div>'+esc(c.commune)+'</div>':'')+'<hr>'+
+    (c.lignes||[]).map(function(l){return '<div class="l"><span>'+(l.q||1)+' x '+esc(l.nom)+'</span><span>'+eur((l.px||0)*(l.q||1))+'</span></div>'+(l.det?'<div class="det">'+esc(l.det)+'</div>':'')}).join("")+'<hr>'+
+    (c.note?'<div><b>NOTE :</b> '+esc(c.note)+'</div><hr>':'')+
+    '<div class="l gros"><span>TOTAL</span><span>'+eur(c.total)+'</span></div>'+
+    '<div class="encadre">À PAYER '+esc(c.paiement).toUpperCase()+'</div>'+
+    '<div class="c">Commande passée sur le site</div>';
+  window.print();
+  if(!c.imprimee_le){var t=new Date().toISOString();c.imprimee_le=t;rendre([]);sb.from("commandes").update({imprimee_le:t}).eq("id",id)}
+}
+
+/* ---------- Démarrage ---------- */
+sb.auth.getSession().then(function(r){if(r.data&&r.data.session)demarrer();else $("vue-cx").hidden=false});
+})();
+</script>
+</body>
+</html>
