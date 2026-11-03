@@ -782,7 +782,12 @@ function majEtat(){
   if(ouvertMaintenant()){on=true;txt="On livre · jusqu'à "+hm(HOR[n.j][1])}
   else{var p=prochaineOuverture();txt=(p.d===0?"Ouvre ce soir à ":"Fermé · réouverture "+libJour(p.d,p.j)+" à ")+hm(p.m)}
   document.querySelectorAll("[data-etat]").forEach(function(el){el.classList.toggle("on",on);el.querySelector("span").textContent=txt});
-  $("l-horaires").innerHTML=[2,3,4,5,6,0,1].map(function(j){var h=HOR[j];return '<tr class="'+(j===n.j?"auj ":"")+(h?"":"ferme")+'"><td>'+JOURS[j]+(j===n.j?" (aujourd'hui)":"")+'</td><td>'+(h?hm(h[0])+" – "+hm(h[1]):"Fermé")+'</td></tr>'}).join("");
+  /* Horaires regroupés : jours qui se suivent avec les mêmes heures */
+  var ordre=[2,3,4,5,6,0,1],grp=[];
+  ordre.forEach(function(j){var h=HOR[j],cle=h?h.join("-"):"ferme",d=grp[grp.length-1];if(d&&d.cle===cle)d.jours.push(j);else grp.push({cle:cle,h:h,jours:[j]})});
+  $("l-horaires").innerHTML=grp.map(function(g){var a=g.jours[0],z=g.jours[g.jours.length-1],auj=g.jours.indexOf(n.j)>=0;
+    var lib=JOURS[a]+(g.jours.length>1?(g.jours.length>2?" au ":" et ")+JOURS[z].toLowerCase():"");
+    return '<tr class="'+(auj?"auj ":"")+(g.h?"":"ferme")+'"><td>'+lib+'</td><td>'+(g.h?hm(g.h[0])+" – "+hm(g.h[1]):"Fermé")+'</td></tr>'}).join("");
 }
 majEtat();setInterval(majEtat,60000);
 
