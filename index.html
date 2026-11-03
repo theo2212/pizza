@@ -238,8 +238,8 @@ section.bloc{padding-block:58px}
 .encart{background:#fff;padding:20px;display:grid;gap:8px;margin-bottom:14px}
 .encart h3{font-size:15px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--vert-f)}
 .horaires{width:100%;border-collapse:collapse;font-size:15px}
-.horaires td{padding:5px 0;border-bottom:1px dotted var(--trait)}
-.horaires td:last-child{text-align:right}
+.horaires td{padding:7px 0;border-bottom:1px dotted var(--trait);vertical-align:top}
+.horaires td:last-child{text-align:right;white-space:nowrap;padding-left:12px}
 .horaires tr.auj td{font-weight:700}
 .horaires tr.ferme td:last-child{color:var(--gris)}
 .paie{display:flex;flex-wrap:wrap;gap:6px}
@@ -874,7 +874,14 @@ function majEtat(){
   if(c)txt="Ouvert · jusqu'à "+hm(c[1]);
   else{var p=prochaine();txt=(p.d===0?"Fermé · ouvre à ":"Fermé · ouvre "+libJour(p.d,p.j,p.m)+" à ")+hm(p.m)}
   document.querySelectorAll("[data-etat]").forEach(function(el){el.classList.toggle("on",!!c);el.querySelector("span").textContent=txt});
-  $("l-horaires").innerHTML=[2,3,4,5,6,0,1].map(function(j){var cs=HOR[j];return '<tr class="'+(j===n.j?"auj ":"")+(cs.length?"":"ferme")+'"><td>'+JOURS[j]+'</td><td>'+(cs.length?cs.map(function(c){return hm(c[0])+"-"+hm(c[1])}).join(" · "):"Fermé")+'</td></tr>'}).join("");
+  /* Jours regroupés quand les horaires sont identiques : « Du mardi au vendredi » */
+  function txtH(cs){return cs.length?cs.map(function(c){return hm(c[0])+" - "+hm(c[1])}).join("<br>"):"Fermé"}
+  var groupes=[];
+  [2,3,4,5,6,0,1].forEach(function(j){var t=txtH(HOR[j]),g=groupes[groupes.length-1];if(g&&g.t===t)g.j.push(j);else groupes.push({t:t,j:[j]})});
+  $("l-horaires").innerHTML=groupes.map(function(g){
+    var a=JOURS[g.j[0]].toLowerCase(),b=JOURS[g.j[g.j.length-1]].toLowerCase();
+    var lib=g.j.length===1?cap(a):g.j.length===2?cap(a)+" et "+b:"Du "+a+" au "+b;
+    return '<tr class="'+(g.j.indexOf(n.j)>=0?"auj ":"")+(g.t==="Fermé"?"ferme":"")+'"><td>'+lib+'</td><td>'+g.t+'</td></tr>'}).join("");
 }
 majEtat();setInterval(majEtat,60000);
 
